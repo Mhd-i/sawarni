@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { DropdownButtonComponent } from '../../dropdown-button/dropdown-button.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-navbar-main-right',
@@ -8,8 +9,11 @@ import { DropdownButtonComponent } from '../../dropdown-button/dropdown-button.c
   styleUrl: './navbar-main-right.component.css'
 })
 export class NavbarMainRightComponent {
+
+  router = inject(Router);
+
   addContentButtonOptions = [
-    {label : 'new Post', onclick : () => {alert("Test")}},
+    {label : 'new Post', onclick : () => {this.router.navigate(['/create-post'])}},
     {label : 'new Equipement', onclick : () => {alert("Test")}},
     {label : 'new Course', onclick : () => {alert("Test")}},
   ];

@@ -6,6 +6,7 @@ import { AuthGuard } from './guards/auth.guard';
 import { PostsViewComponent } from './posts-view/posts-view.component';
 import { EquipmentViewComponent } from './equipment-view/equipment-view.component';
 import { CoursesViewComponent } from './courses-view/courses-view.component';
+import { CreatePostComponent } from './create-post/create-post.component';
 
 export const routes: Routes = [
   {
@@ -27,6 +28,11 @@ export const routes: Routes = [
       { path: 'courses', component: CoursesViewComponent },
       { path: '', redirectTo: 'posts', pathMatch: 'full' } // Default child
     ]
+  },
+  {
+    path : 'create-post',
+    component : CreatePostComponent,
+    canActivate : [AuthGuard]
   }
 ];
 

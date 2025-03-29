@@ -23,6 +23,7 @@ export class UseraccountsService {
       tap((response: any) => {
         if (response.ok) {
           this.isAuthentificated = true;
+          localStorage.setItem('isAuthentificated', 'true');
           localStorage.setItem('loggedInUserId', response.user_id.toString());
         }
       })

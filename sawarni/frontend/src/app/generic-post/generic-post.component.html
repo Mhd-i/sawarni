@@ -1,20 +1,26 @@
-<div id="postContainer">
+<div id="postContainer" [@fadeIn]="animationState">
   <div id="header" class="row pt-1 pb-1 mt-3 mb-1">
     <div id="profilePictureContainer" class="col-auto">
-      <img id="profilePicture" class="rounded-circle" [src]="post.profile_picture_path" height="60px" width="60px">
+      <img id="profilePicture" class="rounded-circle" 
+           [src]="post.profile_picture_path" 
+           height="60px" width="60px"
+           alt="Profile picture">
     </div>
     <div class="col pt-1">
-      <div class="row"><div class="col"><label id="username">{{post.user_name}}</label></div></div>
-      <div class="row"><div class="col"><label id="userDetails">{{post.creation_date}}</label></div></div>
+      <div class="row">
+        <div class="col">
+          <label id="username">{{post.user_name}}</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <label id="userDetails">{{post.creation_date}}</label>
+        </div>
+      </div>
     </div>
     <div class="col-2">
-      <span>
-        Likes
-      </span>
-      <p>
-        {{post.likes_count}}
-      </p>
-      
+      <span>Likes</span>
+      <p>{{post.likes_count}}</p>
     </div>
   </div>
 
@@ -26,10 +32,7 @@
 
   <div id="attachmentsContainer" class="row pt-2 pb-2">
     <div class="col">
-      <img [src]="post.image_url" width="100%">
+      <img [src]="post.image_url" width="100%" [alt]="post.text_content">
     </div>
   </div>
-
-
-
 </div>
