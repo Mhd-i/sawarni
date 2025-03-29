@@ -1,12 +1,13 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { LoginComponent } from './login/login.component';
-import { ExplorePageComponent } from './explore-page/explore-page.component';
+import { LoginComponent } from './components/login/login.component';
+import { ExplorePageComponent } from './components/explore-page/explore-page.component';
 import { AuthGuard } from './guards/auth.guard';
-import { PostsViewComponent } from './posts-view/posts-view.component';
-import { EquipmentViewComponent } from './equipment-view/equipment-view.component';
-import { CoursesViewComponent } from './courses-view/courses-view.component';
-import { CreatePostComponent } from './create-post/create-post.component';
+import { PostsViewComponent } from './components/content-views/posts-view/posts-view.component';
+import { EquipmentViewComponent } from './components/content-views/equipment-view/equipment-view.component';
+import { CoursesViewComponent } from './components/content-views/courses-view/courses-view.component';
+import { CreatePostComponent } from './components/content-create/create-post/create-post.component';
+
 
 export const routes: Routes = [
   {

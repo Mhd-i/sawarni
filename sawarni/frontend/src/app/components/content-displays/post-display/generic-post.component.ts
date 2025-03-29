@@ -1,6 +1,6 @@
 import { Component, Input, ElementRef, AfterViewInit } from '@angular/core';
-import { PostObject } from '../objects/PostObject';
 import { trigger, state, style, transition, animate } from '@angular/animations';
+import { PostObject } from '../../../interfaces/PostObject';
 
 @Component({
   selector: 'app-generic-post',
@@ -25,7 +25,7 @@ import { trigger, state, style, transition, animate } from '@angular/animations'
     ])
   ]
 })
-export class GenericPostComponent implements AfterViewInit {
+export class PostDisplayComponent implements AfterViewInit {
   @Input() post!: PostObject;
   animationState = 'hidden';
 

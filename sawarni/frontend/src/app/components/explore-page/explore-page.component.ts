@@ -1,11 +1,10 @@
 import { Component } from '@angular/core';
-import { NavbarMainComponent } from '../explore_navbar/navbar-main/navbar-main.component';
-import { PostsViewComponent } from '../posts-view/posts-view.component';
 import { RouterOutlet } from '@angular/router';
+import { NavbarMainComponent } from '../explore-navbar/navbar-main/navbar-main.component';
 
 @Component({
   selector: 'app-explore-page',
-  imports: [NavbarMainComponent, PostsViewComponent, RouterOutlet],
+  imports: [NavbarMainComponent, RouterOutlet],
   templateUrl: './explore-page.component.html',
   styleUrl: './explore-page.component.css'
 })
