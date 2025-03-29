@@ -3,6 +3,9 @@ import { Routes, RouterModule } from '@angular/router';
 import { LoginComponent } from './login/login.component';
 import { ExplorePageComponent } from './explore-page/explore-page.component';
 import { AuthGuard } from './guards/auth.guard';
+import { PostsViewComponent } from './posts-view/posts-view.component';
+import { EquipmentViewComponent } from './equipment-view/equipment-view.component';
+import { CoursesViewComponent } from './courses-view/courses-view.component';
 
 export const routes: Routes = [
   {
@@ -17,7 +20,13 @@ export const routes: Routes = [
   {
     path : 'explore-page',
     component : ExplorePageComponent,
-    canActivate : [AuthGuard]
+    canActivate : [AuthGuard],
+    children: [
+      { path: 'posts', component: PostsViewComponent },
+      { path: 'equipment', component: EquipmentViewComponent },
+      { path: 'courses', component: CoursesViewComponent },
+      { path: '', redirectTo: 'posts', pathMatch: 'full' } // Default child
+    ]
   }
 ];
 
