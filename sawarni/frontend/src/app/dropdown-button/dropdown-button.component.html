@@ -1,0 +1,17 @@
+<div class="container">
+
+    <div class="dropdown-button-container" [style.width]="width">
+        <button class="btn btn-dark dropdown-button" (click)="toggleDropDown()">
+            {{label}}
+            <span class="arrow">▼</span>
+        </button>
+        @if(isOpen) {
+            <div class="dropdown-content-container">
+                @for (link of contents; track link)
+                {
+                    <a class="btn btn-basic dropdown-content" href="#" (click)="link.onclick()">{{link.label}}</a> <br>
+                }
+            </div>
+        }
+    </div>
+</div>

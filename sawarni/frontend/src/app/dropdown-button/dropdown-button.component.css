@@ -1,0 +1,45 @@
+
+
+.dropdown-button-container {
+    
+}
+
+#dropdownMenuButton {
+    border-radius: 0%;
+}
+
+.dropdown-button {
+    width: 100%;
+    border-radius: 0%;
+}
+
+.dropdown-content-container {
+    animation-name: dropdown-open-animation;
+    animation-duration: .5s;
+    position: absolute;
+    width: inherit;
+}
+
+
+.dropdown-content {
+    width: 100%;
+    border-radius: 0%;
+    background-color: rgba(0, 0, 0, 0.05);
+}
+
+.dropdown-content:hover {
+    width: 100%;
+    border-radius: 0%;
+    background-color: lightblue;
+}
+
+@keyframes dropdown-open-animation {
+    from {
+        transform: translateY(-10px);
+        opacity: 0;
+    }
+    to {
+        background-color: translateY(0px);
+        opacity: 1;
+    }
+}

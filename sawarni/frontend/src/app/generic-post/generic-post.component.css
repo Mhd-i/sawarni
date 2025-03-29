@@ -1,0 +1,20 @@
+#header, #attachmentsContainer{
+    border: 1px solid #ccc; /* Add a border around the container */
+    background-color: #f9f9f9; /* Optional: Add a light background color */
+}
+
+#textContainer {
+    border: 1px solid #ccc; /* Add a border around the container */
+    background-color: #ffffff; /* Optional: Add a light background color */
+}
+
+#username {
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+}
+
+#userDetails {
+    font-size: 14px;
+    color: #b6b5b5;
+}

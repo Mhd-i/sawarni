@@ -1,0 +1,21 @@
+
+        <div class="offset-3 col-6">
+            @if (isLoading) {
+                <div class="loading">Loading Posts</div>
+            }
+            @else if (error) {
+                <div class="error">{{error}}</div>
+                <button (click)="loadPosts()">Retry</button>
+            }
+            @else {
+                
+                @for(post of posts; track post.id) {
+                    <app-generic-post [post]="post"></app-generic-post>
+                } 
+                
+                @empty {
+                    <div class="empty">No posts available</div>
+                }
+                
+            }
+        </div>
