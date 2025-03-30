@@ -16,7 +16,7 @@
     $in_password = $_POST['in_password'] ?? null;
 
     if (!isset($_POST['in_user_name']) || !isset($_POST['in_password'])) {
-        echo json_encode(["ok" => false, "message" => "user's name and password must be set."]);
+        echo json_encode(["ok" => false, "message" => "user's name and password must be set.", "body" => null]);
     }
     else {
 
@@ -36,12 +36,10 @@
         $user = $stmt->fetch(PDO::FETCH_ASSOC);
         
         if (!$user) {
-            echo json_encode(["ok" => False, "message" => "user doesn't exist."]);
+            echo json_encode(["ok" => False, "message" => "user doesn't exist.", "body" => null]);
         } 
         else {
-            $user['ok'] = True;
-            $user['message'] = 'success';
-            echo json_encode($user);
+            echo json_encode(["ok" => true, "message" => "success", "body" => $user]);
         }
     }
 ?>

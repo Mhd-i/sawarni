@@ -23,6 +23,8 @@
     ]);
         
     $user = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    echo json_encode(['ok' => true, 'message' => 'success', 'body' => null]);
         
         
 ?>
