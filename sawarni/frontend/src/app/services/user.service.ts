@@ -6,19 +6,16 @@ import { ApiResponse } from '../interfaces/ApiResponse';
 @Injectable({
   providedIn: 'root'
 })
-export class PostsService {
+export class UserService {
 
   private apiUrl = 'http://localhost/sawarni/';
 
   private http = inject(HttpClient);
 
-
-  getPosts() : Observable<ApiResponse> {
-    return this.http.post<ApiResponse>(this.apiUrl + 'getPostDisplays.php', null);
-  }
-
-  addPost(postFormData : FormData) : Observable<ApiResponse> {
-    return this.http.post<ApiResponse>(this.apiUrl + 'addPost.php', postFormData);
+  getUserProfile(user_id : number) : Observable<ApiResponse> {
+    const formData = new FormData();
+    formData.append('user_id', user_id.toString())
+    return this.http.post<ApiResponse>(this.apiUrl + "getUserProfile.php", formData)
   }
 
 }
