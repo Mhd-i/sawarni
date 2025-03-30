@@ -18,9 +18,15 @@
         </div>
       </div>
     </div>
-    <div class="col-2">
-      <span>Likes</span>
-      <p>{{post.likes_count}}</p>
+    <div class="col-3 d-flex justify-content-center align-items-center">
+
+      @if (liked) {
+        <img (click)="likePost();" class="mx-3 img-fluid" src="assets/icons/like_full.png" height="25px" width="25px">
+      }
+      @else {
+        <img (click)="likePost();" class="mx-3 img-fluid" src="assets/icons/like_outline.png" height="25px" width="25px">
+      }
+      <span>{{post.likes_count}}</span>
     </div>
   </div>
 

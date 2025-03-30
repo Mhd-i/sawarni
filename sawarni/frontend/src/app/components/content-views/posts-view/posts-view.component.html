@@ -11,7 +11,7 @@
             @else {
                 
                 @for(post of posts; track post.id) {
-                    <app-generic-post [post]="post"></app-generic-post>
+                    <app-post-display [post]="post"></app-post-display>
                 } 
                 
                 @empty {

@@ -1,7 +1,7 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { PostObject } from '../../../interfaces/PostObject';
+import { PostDisplay } from '../../../interfaces/PostDisplay';
 import { PostsService } from '../../../services/posts.service';
-import { PostDisplayComponent } from '../../content-displays/post-display/generic-post.component';
+import { PostDisplayComponent } from '../../content-displays/post-display/post-display.component';
 
 
 @Component({
@@ -12,7 +12,7 @@ import { PostDisplayComponent } from '../../content-displays/post-display/generi
 })
 export class PostsViewComponent implements OnInit {
   
-  posts : PostObject[] = [];
+  posts : PostDisplay[] = [];
   isLoading = true;
   error : string | null = null;
 
