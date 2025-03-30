@@ -24,27 +24,30 @@
         if (move_uploaded_file($file['tmp_name'], $filePath)) {
 
             try {
-                $stmt = $connection->prepare("INSERT INTO post (posted_by, text_content, image_url, creation_date) 
-                                              VALUES (:posted_by, :text_content, :image_url, CURDATE());");
+                $stmt = $connection->prepare("
+                
+                    INSERT INTO post (posted_by, text_content, image_url, creation_date) 
+                    VALUES (:posted_by, :text_content, :image_url, CURDATE());");
                 
                 $stmt->bindParam(':posted_by', $_POST['posted_by']);
                 $stmt->bindParam(':text_content', $_POST['text_content']);
                 $stmt->bindParam(':image_url', $filePath);
 
                 $stmt->execute();
-                $response['message'] = 'File uploaded successfully.';
 
             } 
             catch (PDOException $e) {
-                $response['error'] = 'Database error: ' . $e->getMessage();
+                echo json_encode(['ok' => false, 'message' => 'database error', 'body' => $e]);
+                return;
             }
         } 
         else {
-            $response['error'] = 'Failed to move uploaded file.';
+            echo json_encode(['ok' => false, 'message' => 'failed to move file', 'body' => null]);
+            return;
         }
 
     }
 
-    echo json_encode($response);
+    echo json_encode(['ok' => true, 'message' => 'success', 'body' => null]);
  
 ?>
