@@ -7,6 +7,7 @@ import { PostsViewComponent } from './components/content-views/posts-view/posts-
 import { EquipmentViewComponent } from './components/content-views/equipment-view/equipment-view.component';
 import { CoursesViewComponent } from './components/content-views/courses-view/courses-view.component';
 import { CreatePostComponent } from './components/content-create/create-post/create-post.component';
+import { UserProfileComponent } from './components/user-profile/user-profile.component';
 
 
 export const routes: Routes = [
@@ -34,6 +35,10 @@ export const routes: Routes = [
     path : 'create-post',
     component : CreatePostComponent,
     canActivate : [AuthGuard]
+  },
+  {
+    path : 'user-profile',
+    component : UserProfileComponent
   }
 ];
 

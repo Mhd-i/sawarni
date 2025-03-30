@@ -27,18 +27,26 @@ export class PostsViewComponent implements OnInit {
     this.error = null;
 
 
-    this.postService.getPosts().subscribe({
-      next : (posts) => {
-        this.posts = posts;
-        console.log(posts)
-        this.isLoading = false;
-      },
-      error : (err) => {
-        this.error = "failed to load.";
-        this.isLoading = false;
-        console.log("Error Handling Posts : ", err);
-      }
-    })
+    this.postService.getPosts()
+      .subscribe({
+        next : (result) => {
+          console.log('aa')
+          console.log(result);
+          if (result.ok) {
+            this.posts = result.body;
+            this.isLoading = false;
+          }
+          else {
+            console.error('error retrieving posts : ', result.message);
+            this.isLoading = false;
+          }
+        },
+        error : (err) => {
+          this.error = "failed to load.";
+          this.isLoading = false;
+          console.log("Error Handling Posts : ", err);
+        }
+      });
   }
 
   

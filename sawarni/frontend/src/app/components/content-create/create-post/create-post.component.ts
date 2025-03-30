@@ -44,7 +44,15 @@ export class CreatePostComponent {
       }
     );
 
-    this.postService.addPost(formData);
+    this.postService.addPost(formData)
+      .subscribe(
+        (response) => {
+          console.log('File Uploaded Successfully', response);
+        },
+        (error) => {
+          console.error('Error Uploading File', error);
+        }
+  );;
     
     this.router.navigate(['/explore-page']);
   }

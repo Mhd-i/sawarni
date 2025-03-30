@@ -19,7 +19,12 @@ export class NavbarMainRightComponent {
   ];
 
   settingsButtonOptions = [
-    {label : 'Profile', onclick : () => {alert("")}},
-    {label : 'Logout', onclick : () => {alert("")}},
+    {label : 'Profile', onclick : () => {
+      this.router.navigate(['/user-profile'])
+    }},
+    {label : 'Logout', onclick : () => {
+      localStorage.clear();
+      this.router.navigate(['/login']);
+    }},
   ];
 }
