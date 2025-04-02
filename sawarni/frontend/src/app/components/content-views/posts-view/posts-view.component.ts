@@ -2,6 +2,7 @@ import { Component, inject, OnInit } from '@angular/core';
 import { PostDisplay } from '../../../interfaces/PostDisplay';
 import { PostsService } from '../../../services/posts.service';
 import { PostDisplayComponent } from '../../content-displays/post-display/post-display.component';
+import { ActivatedRoute } from '@angular/router';
 
 
 @Component({
@@ -15,14 +16,35 @@ export class PostsViewComponent implements OnInit {
   posts : PostDisplay[] = [];
   isLoading = true;
   error : string | null = null;
+  displayOptions : string = 'all';
+  user_id : string = '0';
 
-  private postService = inject(PostsService)
+  private postService = inject(PostsService);
+  private route = inject(ActivatedRoute);
 
   ngOnInit(): void {
+    this.route.queryParamMap.subscribe(params => {
+      console.log(params.get('displayOptions'))
+      this.displayOptions = params.get('displayOptions') || 'all';
+      this.user_id = params.get('user_id') || '0';
+    })
     this.loadPosts();
   }
 
   loadPosts() {
+    switch (this.displayOptions) {
+      case 'all':
+        this.loadAllPosts();
+        break;
+      case 'user':
+        this.loadUserPosts(this.user_id);
+        break;
+
+
+    }
+  }
+
+  loadAllPosts() {
     this.isLoading = true;
     this.error = null;
 
@@ -30,8 +52,6 @@ export class PostsViewComponent implements OnInit {
     this.postService.getPosts()
       .subscribe({
         next : (result) => {
-          console.log('aa')
-          console.log(result);
           if (result.ok) {
             this.posts = result.body;
             this.isLoading = false;
@@ -49,6 +69,9 @@ export class PostsViewComponent implements OnInit {
       });
   }
 
+  loadUserPosts(user_id : string) {
+
+  }
   
   
 }

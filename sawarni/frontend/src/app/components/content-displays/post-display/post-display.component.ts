@@ -2,6 +2,7 @@ import { Component, Input, ElementRef, AfterViewInit, inject } from '@angular/co
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import { PostDisplay } from '../../../interfaces/PostDisplay';
 import { LikesService } from '../../../services/likes.service';
+import { PostsService } from '../../../services/posts.service';
 
 @Component({
   selector: 'app-post-display',
@@ -27,39 +28,17 @@ import { LikesService } from '../../../services/likes.service';
   ]
 })
 export class PostDisplayComponent implements AfterViewInit {
+  
   @Input() post!: PostDisplay;
+  @Input() displayOptions = {canEdit : true, canDelete : true};
 
   liked : boolean = false;
-  
-  likesService = inject(LikesService);
   animationState = 'hidden';
 
-  constructor(private el: ElementRef) {}
+  private likesService = inject(LikesService);
+  private postsService = inject(PostsService);
+  private el = inject(ElementRef);
 
-  likePost() {
-    if (this.liked === false) {
-      this.likesService.addLike(Number(localStorage.getItem('loggedInUserId')), Number(this.post.id))
-        .subscribe({
-          next: (response) => {
-            this.liked = true;
-            this.post.likes_count++;
-          },
-          error: (err) => console.error('Error Adding like', err)
-        });
-    }
-    else {
-      this.likesService.removeLike(Number(localStorage.getItem('loggedInUserId')), Number(this.post.id))
-        .subscribe({
-          next: (response) => {
-            this.liked = false;
-            this.post.likes_count--;
-          },
-          error: (err) => console.error('Error Removing like', err)
-        });;
-      this.liked = false;
-    }
-      
-  }
 
   ngOnInit() {
     if (this.post?.liked_by_users) {
@@ -88,4 +67,51 @@ export class PostDisplayComponent implements AfterViewInit {
 
     observer.observe(this.el.nativeElement);
   }
+
+  likePost() {
+    if (this.liked === false) {
+      this.likesService.addLike(Number(localStorage.getItem('loggedInUserId')), Number(this.post.id))
+        .subscribe({
+          next: (response) => {
+            this.liked = true;
+            this.post.likes_count++;
+          },
+          error: (err) => console.error('Error Adding like', err)
+        });
+    }
+    else {
+      this.likesService.removeLike(Number(localStorage.getItem('loggedInUserId')), Number(this.post.id))
+        .subscribe({
+          next: (response) => {
+            this.liked = false;
+            this.post.likes_count--;
+          },
+          error: (err) => console.error('Error Removing like', err)
+        });;
+      this.liked = false;
+    }
+      
+  }
+
+  deletePost() {
+    const userId = localStorage.getItem('loggedInUserId') || '';
+    const postId = this.post.id.toString();
+    const formData = new FormData();
+    formData.append('user_id', userId);
+    formData.append('post_id', postId);
+    this.postsService.deletePost(formData)
+      .subscribe({
+        next: (response) => {
+          alert(response.message);
+        },
+        error: (err) => console.error('Error Deleting Post', err)
+      });
+  }
+
+  editPost() {
+
+  }
+  
+
+  
 }

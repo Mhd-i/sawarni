@@ -1,5 +1,9 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { UserService } from '../../services/user.service';
+import { Router } from '@angular/router';
+import { Overlay, OverlayRef } from '@angular/cdk/overlay';
+import { ComponentPortal } from '@angular/cdk/portal';
+import { ViewUserPostsComponent } from '../view-user-posts/view-user-posts.component';
 
 @Component({
   selector: 'app-user-profile',
@@ -8,15 +12,19 @@ import { UserService } from '../../services/user.service';
   styleUrl: './user-profile.component.css'
 })
 export class UserProfileComponent implements OnInit {
-  private user_id = Number(localStorage.getItem('loggedInUserId'));
-  private userService = inject(UserService);
 
+  private user_id = Number(localStorage.getItem('loggedInUserId'));
+  private overlayRef!: OverlayRef;
   displayed_profile = {
     'user_name' : '',
     'profile_picture_path' : '',
     'join_date' : '',
     'location' : ''
   }
+
+  private userService = inject(UserService);
+  private router = inject(Router);
+  private overlay = inject(Overlay);
   
   ngOnInit(): void {
     this.userService.getUserProfile(this.user_id)
@@ -38,6 +46,71 @@ export class UserProfileComponent implements OnInit {
         }
       });
   }
+
+  onEdit() : void {
+    this.router.navigate(['/user-profile-edit']);
+  }
+
+  onBack() : void {
+    this.router.navigate(['/explore-page']);
+  }
   
+  openViewPostsOverlay() : void {
+    // Create overlay
+    this.overlayRef = this.overlay.create({
+      hasBackdrop: true,
+      positionStrategy: this.overlay.position()
+        .global()
+        .centerHorizontally()
+        .centerVertically(),
+    });
+
+    // Attach component to overlay
+    const portal = new ComponentPortal(ViewUserPostsComponent);
+    this.overlayRef.attach(portal);
+
+    // Close on backdrop click
+    this.overlayRef.backdropClick().subscribe(() => this.closeOverlay());
+  }
+
+  openViewEquipmentOverlay() : void {
+    // Create overlay
+    this.overlayRef = this.overlay.create({
+      hasBackdrop: true,
+      positionStrategy: this.overlay.position()
+        .global()
+        .centerHorizontally()
+        .centerVertically()
+    });
+
+    // Attach component to overlay
+    const portal = new ComponentPortal(ViewUserPostsComponent);
+    this.overlayRef.attach(portal);
+
+    // Close on backdrop click
+    this.overlayRef.backdropClick().subscribe(() => this.closeOverlay());
+  }
+
+  openViewCoursesOverlay() : void {
+    // Create overlay
+    this.overlayRef = this.overlay.create({
+      hasBackdrop: true,
+      positionStrategy: this.overlay.position()
+        .global()
+        .centerHorizontally()
+        .centerVertically()
+    });
+
+    // Attach component to overlay
+    const portal = new ComponentPortal(ViewUserPostsComponent);
+    this.overlayRef.attach(portal);
+
+    // Close on backdrop click
+    this.overlayRef.backdropClick().subscribe(() => this.closeOverlay());
+  }
+
+  closeOverlay() : void {
+    this.overlayRef.dispose();
+  }
 
 }

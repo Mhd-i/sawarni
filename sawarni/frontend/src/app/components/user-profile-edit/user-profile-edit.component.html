@@ -7,26 +7,24 @@
             <img class="" height="100px" width="100px" [src]="displayed_profile['profile_picture_path']">
         </div>
         <div class="col mt-3">
-            <div class="row"><h1>{{displayed_profile['user_name']}}</h1></div>
-            <div class="row"><h6>{{displayed_profile['location']}}</h6></div>
+            <div class="row"><input class="form-control form-control-lg w-50" [(ngModel)]="displayed_profile['user_name']"></div>
+            <div class="row"><input class="form-control form-control-sm w-50 mt-2" value="{{displayed_profile['location']}}"></div>
         </div>
         <div class="col-2 d-flex justify-content-center align-items-center">
-            <button class="btn-lg btn btn-primary" (click)="onEdit()">Edit</button>
+            <button class="btn-lg btn btn-primary" (click)="onSave()">Save</button>
             <button class="btn-lg btn btn-success mx-3" disabled>Message</button>
         </div>
     </div>
     <div class="row mt-2" style="border: solid 1px">
-        <div class="col d-flex justify-content-center">
-            <button (click)="openViewPostsOverlay()" class="btn btn-dark">View Posts</button>
-        </div>
-        <div class="col d-flex justify-content-center">
-            <button (click)="openViewEquipmentOverlay()" class="btn btn-dark">View Equipment</button>
-        </div>
-        <div class="col d-flex justify-content-center">
-            <button (click)="openViewCoursesOverlay()" class="btn btn-dark">View Courses</button>
-        </div>
+        <div class="col d-flex justify-content-center">Posts</div>
+        <div class="col d-flex justify-content-center">Equipements</div>
+        <div class="col d-flex justify-content-center">Courses</div>
     </div>
-    
+    <div class="row" style="border: solid 1px">
+        <div class="col d-flex justify-content-center">21</div>
+        <div class="col d-flex justify-content-center">0</div>
+        <div class="col d-flex justify-content-center">1</div>
+    </div>
     <div class="row mt-2" style="border: solid 1px;">
         <div class="col">
             <h3 class="mt-2">About me</h3>
