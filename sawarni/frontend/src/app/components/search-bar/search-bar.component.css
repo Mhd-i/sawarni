@@ -1,0 +1,4 @@
+.search-suggestions {
+    z-index: 1050; /* Higher than Bootstrap's navbar (1030) */
+    box-shadow: 0 6px 12px rgba(0,0,0,0.175);
+  }

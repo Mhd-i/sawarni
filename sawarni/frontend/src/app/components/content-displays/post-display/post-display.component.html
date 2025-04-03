@@ -1,11 +1,21 @@
 <div id="postContainer" [@fadeIn]="animationState">
+  
+
+
+
+
+  <!-- Header -->
   <div id="header" class="row pt-1 pb-1 mt-3 mb-1">
+
+    <!-- pfp -->
     <div id="profilePictureContainer" class="col-auto">
       <img id="profilePicture" class="rounded-circle" 
            [src]="post.profile_picture_path" 
            height="60px" width="60px"
            alt="Profile picture">
     </div>
+
+    <!-- username and post details -->
     <div class="col pt-1">
       <div class="row">
         <div class="col">
@@ -18,8 +28,9 @@
         </div>
       </div>
     </div>
-    <div class="col-3 d-flex justify-content-center align-items-center">
 
+    <!-- like button and number of likes -->
+    <div class="col-3 d-flex justify-content-center align-items-center">
       @if (liked) {
         <img (click)="likePost();" class="mx-3 img-fluid" src="assets/icons/like_full.png" height="25px" width="25px">
       }
@@ -28,17 +39,57 @@
       }
       <span>{{post.likes_count}}</span>
     </div>
+
   </div>
 
+
+
+
+
+  <!-- Text -->
   <div id="textContainer" class="row pt-2 mb-1">
     <div class="col">
       <p id="text">{{post.text_content}}</p>
     </div>
   </div>
 
+
+
+
+
+  <!-- Image -->
   <div id="attachmentsContainer" class="row pt-2 pb-2">
     <div class="col">
       <img [src]="post.image_url" width="100%" [alt]="post.text_content">
     </div>
   </div>
+
+
+
+
+
+  <!-- More Options -->
+  <div id="moreOptionsContainer" class="row pt-2 pb-2">
+    <div class="col d-flex justify-content-end">
+
+      <!-- edit button -->
+      @if (displayOptions.canEdit) {
+        <button class="btn" (click)="editPost()">
+          <img src="assets/icons/edit.png" width="20px" height="20px">
+        </button>
+      }
+
+      <!-- delete button -->
+      @if (displayOptions.canDelete) {
+        <button class="btn" (click)="deletePost()">
+          <img src="assets/icons/trashcan.png" width="20px" height="20px">
+        </button>
+      }
+    </div>
+  </div>
+
+
+
+
+  
 </div>
