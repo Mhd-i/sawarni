@@ -22,4 +22,9 @@ export class UserService {
     return this.http.post<ApiResponse>(this.apiUrl + 'updateUserProfile.php', new_profile);
   }
 
+  suggestUsingKeyword(keyword : FormData) : Observable<ApiResponse> {
+    return this.http.post<ApiResponse>(this.apiUrl + 'suggestUsingKeyword.php', keyword);
+  }
+
+
 }

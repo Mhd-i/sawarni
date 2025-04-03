@@ -1,0 +1,22 @@
+<div class="row" style="border: solid 1px;">
+    <div class="col d-flex justify-content-center">
+        <h2>Login</h2>
+    </div>
+</div>
+<div class="row" style="border: solid 1px;">
+    <div class="col">
+        <label class="form-label">Username : </label>
+        <input [(ngModel)]="loginRequest.in_user_name" name="username" class="form-control" type="text" id="inputUsername">
+    </div>
+</div>
+<div class="row" style="border: solid 1px;">
+    <div class="col">
+        <label class="form-label">Password : </label>
+        <input [(ngModel)]="loginRequest.in_password" name="password" class="form-control" type="password" id="inputPassword">
+    </div>
+</div>
+<div class="row">
+    <div class="col d-block">
+        <button class="btn" (click)="onLogin()">Login</button>
+    </div>
+</div>

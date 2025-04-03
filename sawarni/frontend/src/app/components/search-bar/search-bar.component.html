@@ -1,19 +1,31 @@
 <div class="container mt-2 mb-2">
     <div class="row">
         <div class="col">
-            <div class="input-group">
-                <input class="form-control" placeholder="Look for a photographer">
+            <div class="input-group search-container">
+                <input class="form-control" 
+                       placeholder="Look for a photographer" 
+                       [(ngModel)]="inputText" 
+                       (input)="onInput()"
+                       (blur)="onBlur()"
+                       (focus)="onFocus()">
                 <div class="input-group-prepend">
                     <button class="btn btn-outline-dark">
                         <img src="assets/icons/search.png" width="15px" height="15px">
                     </button>
                 </div>
             </div>
-            <div style="position: fixed;">
-                @for (s of suggestions; track s) {
-                    <div class="row">
-                        <label>{{s.label}}</label>
-                    </div>
+            <div class="search-suggestions position-absolute " style="position: fixed;">
+                @if (displaySuggestions) {
+                <ul class="list-group suggestions-dropdown" >
+                
+                    @for (s of suggestions; track s) {
+                        <li class="list-group-item suggestion-item">
+                            <button class="btn" (click)="s.click()">
+                                {{ s.user_name }}
+                            </button>
+                        </li>
+                    }
+                </ul>
                 }
             </div>
         </div>

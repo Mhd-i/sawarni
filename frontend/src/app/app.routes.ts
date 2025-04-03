@@ -8,7 +8,6 @@ import { EquipmentViewComponent } from './components/content-views/equipment-vie
 import { CoursesViewComponent } from './components/content-views/courses-view/courses-view.component';
 import { CreatePostComponent } from './components/content-create/create-post/create-post.component';
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
-import { UserProfileEditComponent } from './components/user-profile-edit/user-profile-edit.component';
 
 
 export const routes: Routes = [
@@ -40,28 +39,7 @@ export const routes: Routes = [
   {
     path : 'user-profile',
     component : UserProfileComponent
-  },
-  {
-    path : 'user-profile/:id',
-    component : UserProfileComponent
-  },
-  {
-    path : 'user-profile-edit',
-    component : UserProfileEditComponent
-  },
-  {
-    path : 'view-posts',
-    component : PostsViewComponent
-  },
-  {
-    path : 'view-equipment',
-    component : EquipmentViewComponent
-  },
-  {
-    path : 'view-courses',
-    component : CoursesViewComponent
-  },
-
+  }
 ];
 
 @NgModule({
