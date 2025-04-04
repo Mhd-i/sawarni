@@ -63,3 +63,16 @@
   #attachmentsContainer img:hover {
     transform: scale(1.02);
   }
+
+  
+.displayed-video {
+  max-height: 400px;
+  height: auto;
+  object-fit: contain; 
+}
+
+.displayed-image {
+  max-height: 400px; 
+     
+  height: auto;      
+}
