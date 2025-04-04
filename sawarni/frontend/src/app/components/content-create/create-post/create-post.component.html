@@ -7,7 +7,7 @@
                     <label class="form-label">Text : </label>
                     <input class="form-control" [(ngModel)]="text_content">
                     <label class="form-label mt-3">Images : </label>
-                    <input type="file" class="form-control" (change)="onFileSelected($event)">
+                    <input type="file" class="form-control" (change)="onFileSelected($event)" multiple>
                     <div class="d-flex justify-content-end mt-4 gap-2">
                         <button class="btn btn-secondary" (click)="onCancel()">Cancel</button>
                         <button class="btn btn-primary" (click)="onUpload()">Post</button>

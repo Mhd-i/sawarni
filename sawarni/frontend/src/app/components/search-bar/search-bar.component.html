@@ -20,7 +20,7 @@
                 
                     @for (s of suggestions; track s) {
                         <li class="list-group-item suggestion-item">
-                            <button class="btn" (click)="s.click()">
+                            <button class="btn" (mousedown)="s.click()">
                                 {{ s.user_name }}
                             </button>
                         </li>

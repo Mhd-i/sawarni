@@ -12,6 +12,8 @@
     // Database connection and file upload logic here
     include_once("connection.php");
 
+    $baseUrl = "http://localhost/sawarni/";
+
     $stmt = $connection->prepare("
         SELECT 
             p.id,
@@ -19,7 +21,6 @@
             u.profile_picture_path, 
             p.id as post_id,
             p.text_content, 
-            p.image_url, 
             p.creation_date, 
             COUNT(l.user_id) AS likes_count,
             GROUP_CONCAT(l.user_id) AS liked_by_users
@@ -44,16 +45,40 @@
         return;
     }
 
-    $baseUrl = "http://localhost/sawarni/";
-    
-    // Transform each post's image_url
-    $transformedPosts = array_map(function($post) use ($baseUrl) {
-        $post['image_url'] = $baseUrl . ltrim($post['image_url'], '/');
-        $post['profile_picture_path'] = $baseUrl . ltrim($post['profile_picture_path'], '/');
-        return $post;
-    }, $posts);
+    foreach($posts as &$post) {
 
-    echo json_encode(['ok' => true, 'message' => 'success', 'body' => $transformedPosts]);
+        $post['profile_picture_path'] = $baseUrl . ltrim($post['profile_picture_path'], '/');
+
+        $post_id = $post['id'];
+
+        $stmt = $connection->prepare('
+            SELECT  u.file_path,
+                    u.file_type
+            FROM upload AS u, post AS p, postattachment as pa
+            WHERE u.upload_id = pa.upload_id AND
+                p.id = pa.post_id AND
+                p.id = :post_id;
+        ');
+
+        $stmt->execute([
+            ':post_id' => $post_id
+        ]);
+
+        $attachments = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        
+        // Transform each post's image_url
+        $transformedAttachments = array_map(function($attachment) use ($baseUrl) {
+            $attachment['file_path'] = $baseUrl . ltrim($attachment['file_path'], '/');
+            return $attachment;
+        }, $attachments);
+
+        $post['attachments'] = $transformedAttachments;
+    
+    }
+
+    
+
+    echo json_encode(['ok' => true, 'message' => 'success', 'body' => $posts]);
 
 
 
