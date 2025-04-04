@@ -1,8 +1,12 @@
-import { Component, Input, ElementRef, AfterViewInit, inject } from '@angular/core';
+import { Component, Input, ElementRef, AfterViewInit, inject, Injector } from '@angular/core';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import { PostDisplay } from '../../../interfaces/PostDisplay';
 import { LikesService } from '../../../services/likes.service';
 import { PostsService } from '../../../services/posts.service';
+import { Router } from '@angular/router';
+import { Overlay, OverlayRef } from '@angular/cdk/overlay';
+import { ComponentPortal } from '@angular/cdk/portal';
+import { ViewImagesComponent } from '../../view-images/view-images.component';
 
 @Component({
   selector: 'app-post-display',
@@ -33,11 +37,15 @@ export class PostDisplayComponent implements AfterViewInit {
   @Input() displayOptions = {canEdit : true, canDelete : true};
 
   liked : boolean = false;
+  viewAllAttachments : boolean = false;
   animationState = 'hidden';
+  private overlayRef!: OverlayRef;
 
   private likesService = inject(LikesService);
   private postsService = inject(PostsService);
   private el = inject(ElementRef);
+  private router = inject(Router);
+  private overlay = inject(Overlay);
 
 
   ngOnInit() {
@@ -45,6 +53,8 @@ export class PostDisplayComponent implements AfterViewInit {
       const userId = localStorage.getItem('loggedInUserId') || '';
       this.liked = this.post.liked_by_users.includes(userId);
     }
+
+    console.log(this.post.attachments[0].file_path)
   }
 
   ngAfterViewInit() {
@@ -112,6 +122,40 @@ export class PostDisplayComponent implements AfterViewInit {
 
   }
   
+  onProfilePictureClick() {
+    this.router.navigate(['/user-profile'])
+  }
 
+  openAttachmentsView(): void {
+    this.overlayRef = this.overlay.create({
+        hasBackdrop: true,
+        positionStrategy: this.overlay.position()
+            .global()
+            .centerHorizontally()
+            .centerVertically(),
+    });
+    
+    const portal = new ComponentPortal(ViewImagesComponent);
+    const componentRef = this.overlayRef.attach(portal);
+    
+    // Pass data directly to the component instance
+    componentRef.instance.attachments = this.post.attachments;
+    // Make sure ViewImagesComponent has an @Input() for images
+
+    this.overlayRef.backdropClick().subscribe(() => this.closeOverlay());
+
+  }
+
+  closeOverlay() : void {
+    this.overlayRef.dispose();
+  }
+
+  onViewMoreAttachments() {
+    this.viewAllAttachments = true;
+  }
+
+  onViewLessAttachments() {
+    this.viewAllAttachments = false;
+  }
   
 }

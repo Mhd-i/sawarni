@@ -12,7 +12,8 @@
       <img id="profilePicture" class="rounded-circle" 
            [src]="post.profile_picture_path" 
            height="60px" width="60px"
-           alt="Profile picture">
+           alt="Profile picture"
+           (click)="onProfilePictureClick()">
     </div>
 
     <!-- username and post details -->
@@ -60,7 +61,24 @@
   <!-- Image -->
   <div id="attachmentsContainer" class="row pt-2 pb-2">
     <div class="col">
-      <img [src]="post.image_url" width="100%" [alt]="post.text_content">
+      @if (viewAllAttachments) {
+        @for (attachment of post.attachments; track attachment; let i = $index) {
+          <img  [src]="post.attachments[i].file_path"
+            width="100%" 
+            alt="Image could not be displayed"
+            (mousedown)="openAttachmentsView()"
+            class="mt-2">
+          }
+          <a (mousedown)="onViewLessAttachments()">View less.</a>
+      }
+      @else {
+        <img  [src]="post.attachments[0].file_path"
+            width="100%" 
+            alt="Image could not be displayed"
+            (mousedown)="openAttachmentsView()"
+            class="mt-2">
+        <a (mousedown)="onViewMoreAttachments()">View more.</a>
+      }
     </div>
   </div>
 
