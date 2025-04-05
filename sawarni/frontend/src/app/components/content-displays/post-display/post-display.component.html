@@ -68,7 +68,7 @@
             <img  [src]="post.attachments[i].file_path"
             width="100%" 
             alt="Image could not be displayed"
-            (mousedown)="openAttachmentsView()"
+            (mousedown)="openAttachmentsView(i)"
             class="mt-2 displayed-image">
             }
           
@@ -76,7 +76,7 @@
           @if (['mp4'].includes(post.attachments[i].file_type)) {
             <video width="100%" 
                     controls
-                    (mousedown)="openAttachmentsView()"
+                    (mousedown)="openAttachmentsView(i)"
                     class="mt-2 displayed-video">
               <source [src]="post.attachments[i].file_path" type="video/mp4">
               Your browser does not support the video tag.
@@ -94,14 +94,14 @@
           <img  [src]="post.attachments[0].file_path"
               width="100%" 
               alt="Image could not be displayed"
-              (mousedown)="openAttachmentsView()"
+              (mousedown)="openAttachmentsView(0)"
               class="mt-2 displayed-image">
         }
 
         @if (['mp4'].includes(post.attachments[0].file_type)) {
           <video width="100%" 
                 controls
-                (mousedown)="openAttachmentsView()"
+                (mousedown)="openAttachmentsView(0)"
                 class="mt-2 displayed-video">
             <source [src]="post.attachments[0].file_path" type="video/mp4">
             Your browser does not support the video tag.

@@ -5,7 +5,6 @@ import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { LoginRequest } from '../../interfaces/LoginRequest';
 
-
 @Component({
   selector: 'app-login',
   imports: [FormsModule],
@@ -25,7 +24,6 @@ export class LoginComponent {
     in_password : ''
   }
 
-
   onLogin() {
     this.usersAccountService.login(this.loginRequest)
       .subscribe({
@@ -43,16 +41,4 @@ export class LoginComponent {
         }
       });
   }
-
-
-  /*
-  onLogin() {
-    let apiUrl = 'https://dummyjson.com/auth/login';
-    this.http.post(apiUrl, this.loginObject).subscribe((response : any) => {
-      this.router.navigate(['/explore-page']);
-      localStorage.setItem('loggedInUserName', response.username);
-    })
-  }
-  */
-
 }

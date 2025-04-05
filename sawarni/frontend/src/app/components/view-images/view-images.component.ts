@@ -11,7 +11,7 @@ import { Attachment } from '../../interfaces/Attachment';
 export class ViewImagesComponent {
   
   @Input() attachments : Attachment[] = [];
-  displayedImageIndex : number = 0;
+  @Input() displayedImageIndex : number = 0;
 
   displayNextAttachment() {
     this.displayedImageIndex++;

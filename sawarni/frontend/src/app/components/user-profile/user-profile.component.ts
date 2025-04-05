@@ -74,11 +74,16 @@ export class UserProfileComponent implements OnInit {
         .global()
         .centerHorizontally()
         .centerVertically(),
+      scrollStrategy: this.overlay.scrollStrategies.block() // or .reposition()
     });
 
     // Attach component to overlay
     const portal = new ComponentPortal(ViewUserPostsComponent);
-    this.overlayRef.attach(portal);
+
+    const componentRef = this.overlayRef.attach(portal);
+    
+    // Pass data directly to the component instance
+    componentRef.instance.userId = this.user_id;
 
     // Close on backdrop click
     this.overlayRef.backdropClick().subscribe(() => this.closeOverlay());

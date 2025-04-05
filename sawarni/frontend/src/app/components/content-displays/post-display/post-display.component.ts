@@ -54,7 +54,7 @@ export class PostDisplayComponent implements AfterViewInit {
       this.liked = this.post.liked_by_users.includes(userId);
     }
 
-    console.log(this.post.attachments[0].file_path)
+
   }
 
   ngAfterViewInit() {
@@ -90,6 +90,7 @@ export class PostDisplayComponent implements AfterViewInit {
         });
     }
     else {
+      console.log(localStorage.getItem('loggedInUserId'))
       this.likesService.removeLike(Number(localStorage.getItem('loggedInUserId')), Number(this.post.id))
         .subscribe({
           next: (response) => {
@@ -126,7 +127,7 @@ export class PostDisplayComponent implements AfterViewInit {
     this.router.navigate(['/user-profile'])
   }
 
-  openAttachmentsView(): void {
+  openAttachmentsView(displayedImageIndex : number): void {
     this.overlayRef = this.overlay.create({
         hasBackdrop: true,
         positionStrategy: this.overlay.position()
@@ -140,6 +141,7 @@ export class PostDisplayComponent implements AfterViewInit {
     
     // Pass data directly to the component instance
     componentRef.instance.attachments = this.post.attachments;
+    componentRef.instance.displayedImageIndex = displayedImageIndex;
     // Make sure ViewImagesComponent has an @Input() for images
 
     this.overlayRef.backdropClick().subscribe(() => this.closeOverlay());

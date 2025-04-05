@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 04, 2025 at 06:28 PM
+-- Generation Time: Apr 05, 2025 at 02:29 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.0.30
 
@@ -47,6 +47,15 @@ CREATE TABLE `post` (
   `creation_date` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `post`
+--
+
+INSERT INTO `post` (`id`, `posted_by`, `text_content`, `image_url`, `creation_date`) VALUES
+(40, 1, 'fafa', NULL, '2025-04-05'),
+(41, 2, 'tiroaza', NULL, '2025-04-05'),
+(42, 2, 'jane', NULL, '2025-04-05');
+
 -- --------------------------------------------------------
 
 --
@@ -57,6 +66,24 @@ CREATE TABLE `postattachment` (
   `post_id` int(11) DEFAULT NULL,
   `upload_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `postattachment`
+--
+
+INSERT INTO `postattachment` (`post_id`, `upload_id`) VALUES
+(37, 9),
+(37, 10),
+(37, 11),
+(38, 12),
+(39, 13),
+(39, 14),
+(40, 15),
+(40, 16),
+(41, 17),
+(41, 18),
+(41, 19),
+(42, 20);
 
 -- --------------------------------------------------------
 
@@ -69,6 +96,24 @@ CREATE TABLE `upload` (
   `file_path` varchar(500) NOT NULL,
   `file_type` varchar(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `upload`
+--
+
+INSERT INTO `upload` (`upload_id`, `file_path`, `file_type`) VALUES
+(9, 'uploads/2023-11-12_19-22-19.png', 'png'),
+(10, 'uploads/2024-01-26_19-31-10.png', 'png'),
+(11, 'uploads/2024-01-29_18-38-51.png', 'png'),
+(12, 'uploads/MMV.mp4', 'mp4'),
+(13, 'uploads/481035484_8933466520096423_4647936741498567879_n.mp4', 'mp4'),
+(14, 'uploads/481975643_4050775005199036_7365244694073895268_n (1).jpg', 'jpg'),
+(15, 'uploads/481368844_9289984564423323_8759346423402632473_n.mp4', 'mp4'),
+(16, 'uploads/Le mont Boukornine, vu du ciel (III) 2-2 screenshot.png', 'png'),
+(17, 'uploads/481035484_8933466520096423_4647936741498567879_n.mp4', 'mp4'),
+(18, 'uploads/481368844_9289984564423323_8759346423402632473_n (1).mp4', 'mp4'),
+(19, 'uploads/481975643_4050775005199036_7365244694073895268_n (1).jpg', 'jpg'),
+(20, 'uploads/video.mp4', 'mp4');
 
 -- --------------------------------------------------------
 
@@ -140,13 +185,13 @@ ALTER TABLE `useraccount`
 -- AUTO_INCREMENT for table `post`
 --
 ALTER TABLE `post`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
 
 --
 -- AUTO_INCREMENT for table `upload`
 --
 ALTER TABLE `upload`
-  MODIFY `upload_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `upload_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT for table `useraccount`

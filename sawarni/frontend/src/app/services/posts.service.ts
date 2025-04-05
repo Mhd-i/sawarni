@@ -21,12 +21,12 @@ export class PostsService {
     return this.http.post<ApiResponse>(this.apiUrl + 'addPost.php', postFormData);
   }
 
-  getUserPosts(userIdFormData : FormData) : Observable<ApiResponse> {
-    return this.http.post<ApiResponse>(this.apiUrl + 'getPostDisplays.php', userIdFormData);
-  }
-
   deletePost(formData : FormData) : Observable<ApiResponse> {
     return this.http.post<ApiResponse>(this.apiUrl + 'deletePost.php', formData);
+  }
+
+  getUserPosts(formData : FormData) : Observable<ApiResponse> {
+    return this.http.post<ApiResponse>(this.apiUrl + 'getUserPostDisplays.php', formData);
   }
 
 }
