@@ -1,0 +1,65 @@
+#postContainer {
+    will-change: transform, opacity;
+    margin-bottom: 20px;
+    overflow: hidden;
+  }
+  
+  #header, #attachmentsContainer {
+    border: 1px solid #ccc;
+    background-color: #f9f9f9;
+    transition: all 0.3s ease;
+    border-radius: 8px;
+  }
+  
+  #header:hover, #attachmentsContainer:hover {
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    transform: translateY(-2px);
+  }
+  
+  #textContainer {
+    border: 1px solid #ccc;
+    background-color: #ffffff;
+    transition: all 0.3s ease;
+    border-radius: 8px;
+    padding: 15px;
+  }
+  
+  #textContainer:hover {
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  }
+  
+  #username {
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+  }
+  
+  #userDetails {
+    font-size: 14px;
+    color: #b6b5b5;
+  }
+  
+  #profilePicture {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  }
+  
+  #profilePicture:hover {
+    transform: scale(1.1);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  }
+  
+  #text {
+    white-space: pre-line;
+    word-break: break-word;
+    line-height: 1.5;
+  }
+  
+  #attachmentsContainer img {
+    border-radius: 8px;
+    transition: transform 0.3s ease;
+  }
+  
+  #attachmentsContainer img:hover {
+    transform: scale(1.02);
+  }

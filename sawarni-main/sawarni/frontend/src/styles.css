@@ -1,0 +1,29 @@
+/* You can add global styles to this file, and also import other style files */
+* {
+    font-family: monospace;
+}
+
+
+::-webkit-scrollbar {
+    width: 6px;
+    height: 6px; /* for horizontal scrollbars */
+  }
+  
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 3px;
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgba(0, 0, 0, 0.4);
+  }
+  
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(0, 0, 0, 0.2) transparent;
+  }
+ 
