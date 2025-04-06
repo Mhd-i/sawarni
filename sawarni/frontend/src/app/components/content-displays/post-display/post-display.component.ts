@@ -124,7 +124,8 @@ export class PostDisplayComponent implements AfterViewInit {
   }
   
   onProfilePictureClick() {
-    this.router.navigate(['/user-profile'])
+
+    this.router.navigate(['/user-profile']);
   }
 
   openAttachmentsView(displayedImageIndex : number): void {

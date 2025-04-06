@@ -6,16 +6,28 @@
     height: 100%;
     object-fit: cover;
     z-index: -1;
-  }
-  .form-control {
+}
+
+.form-control {
     background: rgba(255, 255, 255, 0.1);
     border: none;
-    color: white;
-  }
-  .form-control::placeholder {
+    color: white
+}
+
+.form-control::placeholder {
     color: rgba(255, 255, 255, 0.5);
-  }
-  .form-control:focus {
+}
+
+.form-control:focus {
     background: rgba(255, 255, 255, 0.2);
     box-shadow: none;
-  }
+}
+
+.login-container {
+    background-color: rgba(255, 255, 255, 0.005); /* semi-transparent */
+    backdrop-filter: blur(30px);
+
+    /* Optional additional styling */
+    padding: 20px;
+    border-radius: 10px;
+}
