@@ -1,1 +1,26 @@
-<p>equipment-view works!</p>
+<div class="container">
+    <div class="row">
+        <div class="col">
+            @if (isLoading) {
+                <div class="loading">Loading Posts</div>
+            }
+            @else if (error) {
+                <div class="error">{{error}}</div>
+                <button (click)="loadEquipmentDisplays()">Retry</button>
+            }
+
+            @else {
+                
+                @for(equipment of equipments; track equipment) {
+                    <app-equipment-display [equipment]="equipment"></app-equipment-display>
+                } 
+                @empty {
+                    <div class="empty">No equipments available</div>
+                }
+
+            }
+        </div>
+    </div>
+</div>
+
+        

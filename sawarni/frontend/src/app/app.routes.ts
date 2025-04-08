@@ -9,6 +9,9 @@ import { CoursesViewComponent } from './components/content-views/courses-view/co
 import { CreatePostComponent } from './components/content-create/create-post/create-post.component';
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
 import { UserProfileEditComponent } from './components/user-profile-edit/user-profile-edit.component';
+import { PostsExploreComponent } from './components/content-explores/posts-explore/posts-explore.component';
+import { EquipmentsExploreComponent } from './components/content-explores/equipments-explore/equipments-explore.component';
+import { ContactComponent } from './components/contact/contact.component';
 
 
 export const routes: Routes = [
@@ -26,10 +29,10 @@ export const routes: Routes = [
     component : ExplorePageComponent,
     canActivate : [AuthGuard],
     children: [
-      { path: 'posts', component: PostsViewComponent },
-      { path: 'equipment', component: EquipmentViewComponent },
+      { path: 'posts', component: PostsExploreComponent },
+      { path: 'equipment', component: EquipmentsExploreComponent },
       { path: 'courses', component: CoursesViewComponent },
-      { path: '', redirectTo: 'posts', pathMatch: 'full' } // Default child
+      { path: '', redirectTo: 'posts', pathMatch: 'full' }
     ]
   },
   {
@@ -60,6 +63,10 @@ export const routes: Routes = [
   {
     path : 'view-courses',
     component : CoursesViewComponent
+  },
+  {
+    path : 'contact/:userId',
+    component : ContactComponent
   },
 
 ];

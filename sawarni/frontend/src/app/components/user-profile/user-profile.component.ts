@@ -19,7 +19,9 @@ export class UserProfileComponent implements OnInit {
     'user_name' : '',
     'profile_picture_path' : '',
     'join_date' : '',
-    'location' : ''
+    'location' : '',
+    'resume_path' : '',
+    'aboutMe' : ''
   }
 
   private userService = inject(UserService);
@@ -46,6 +48,8 @@ export class UserProfileComponent implements OnInit {
           this.displayed_profile['profile_picture_path'] = result.body.profile_picture_path;
           this.displayed_profile['join_date'] = result.body.join_date;
           this.displayed_profile['location'] = result.body.location;
+          this.displayed_profile['resume_path'] = result.body.resume_path;
+          this.displayed_profile['aboutMe'] = result.body.aboutMe;
         } 
         else {
           alert(result.message);
