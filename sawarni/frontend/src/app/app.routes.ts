@@ -4,11 +4,14 @@ import { LoginComponent } from './components/login/login.component';
 import { ExplorePageComponent } from './components/explore-page/explore-page.component';
 import { AuthGuard } from './guards/auth.guard';
 import { PostsViewComponent } from './components/content-views/posts-view/posts-view.component';
-import { EquipmentViewComponent } from './components/content-views/equipment-view/equipment-view.component';
 import { CoursesViewComponent } from './components/content-views/courses-view/courses-view.component';
 import { CreatePostComponent } from './components/content-create/create-post/create-post.component';
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
 import { UserProfileEditComponent } from './components/user-profile-edit/user-profile-edit.component';
+import { PostDisplayComponent } from './components/content-displays/post-display/post-display.component';
+import { EquipmentDisplayComponent } from './components/equipment-display/equipment-display.component';
+import { EquipmentsViewComponent } from './components/content-views/equipments-view/equipments-view.component';
+
 
 
 export const routes: Routes = [
@@ -27,7 +30,7 @@ export const routes: Routes = [
     canActivate : [AuthGuard],
     children: [
       { path: 'posts', component: PostsViewComponent },
-      { path: 'equipment', component: EquipmentViewComponent },
+      { path: 'equipments', component: EquipmentsViewComponent },
       { path: 'courses', component: CoursesViewComponent },
       { path: '', redirectTo: 'posts', pathMatch: 'full' } // Default child
     ]
@@ -53,14 +56,15 @@ export const routes: Routes = [
     path : 'view-posts',
     component : PostsViewComponent
   },
-  {
-    path : 'view-equipment',
-    component : EquipmentViewComponent
-  },
+ 
   {
     path : 'view-courses',
     component : CoursesViewComponent
   },
+  
+    
+  
+
 
 ];
 

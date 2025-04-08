@@ -2,10 +2,10 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Mar 29, 2025 at 11:44 AM
--- Server version: 10.4.32-MariaDB
--- PHP Version: 8.0.30
+-- Hôte : 127.0.0.1
+-- Généré le : mar. 08 avr. 2025 à 15:04
+-- Version du serveur : 10.4.32-MariaDB
+-- Version de PHP : 8.0.30
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,13 +18,52 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `sawarnidb`
+-- Base de données : `sawarnidb`
 --
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `liked`
+-- Structure de la table `equipment`
+--
+
+CREATE TABLE `equipment` (
+  `id` int(11) NOT NULL,
+  `name` varchar(100) NOT NULL,
+  `description` varchar(512) DEFAULT NULL,
+  `sellerid` int(11) NOT NULL,
+  `price` float(100,5) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Déchargement des données de la table `equipment`
+--
+
+INSERT INTO `equipment` (`id`, `name`, `description`, `sellerid`, `price`) VALUES
+(1, 'camera 1', 'djazhdhaz', 1, 180.20000);
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `equipmentattachment`
+--
+
+CREATE TABLE `equipmentattachment` (
+  `equipmentid` int(11) NOT NULL,
+  `uploadid` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Déchargement des données de la table `equipmentattachment`
+--
+
+INSERT INTO `equipmentattachment` (`equipmentid`, `uploadid`) VALUES
+(1, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `liked`
 --
 
 CREATE TABLE `liked` (
@@ -36,7 +75,7 @@ CREATE TABLE `liked` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `post`
+-- Structure de la table `post`
 --
 
 CREATE TABLE `post` (
@@ -48,7 +87,7 @@ CREATE TABLE `post` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `post`
+-- Déchargement des données de la table `post`
 --
 
 INSERT INTO `post` (`id`, `posted_by`, `text_content`, `image_url`, `creation_date`) VALUES
@@ -61,12 +100,32 @@ INSERT INTO `post` (`id`, `posted_by`, `text_content`, `image_url`, `creation_da
 (11, 6, 'Visiting historical sites in Boston', 'uploads/image1.png', '2023-04-22'),
 (12, 7, 'Austin live music scene is amazing!', 'uploads/image1.png', '2023-05-08'),
 (13, 8, 'Hiking near Denver this weekend', 'uploads/image1.png', '2023-03-12'),
-(14, 9, 'San Francisco tech meetup was great', 'uploads/image1.png', '2023-06-05');
+(14, 9, 'San Francisco tech meetup was great', 'uploads/image1.png', '2023-06-05'),
+(15, 2, 'zeb el mourouj', 'uploads/1.jpg', '2025-04-04');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `useraccount`
+-- Structure de la table `upload`
+--
+
+CREATE TABLE `upload` (
+  `uploadid` int(11) NOT NULL,
+  `file_path` varchar(512) NOT NULL,
+  `file_type` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Déchargement des données de la table `upload`
+--
+
+INSERT INTO `upload` (`uploadid`, `file_path`, `file_type`) VALUES
+(1, 'uploads/1.jpg', 'jpg');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `useraccount`
 --
 
 CREATE TABLE `useraccount` (
@@ -79,7 +138,7 @@ CREATE TABLE `useraccount` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `useraccount`
+-- Déchargement des données de la table `useraccount`
 --
 
 INSERT INTO `useraccount` (`user_id`, `user_name`, `join_date`, `profile_picture_path`, `location`, `password`) VALUES
@@ -95,50 +154,80 @@ INSERT INTO `useraccount` (`user_id`, `user_name`, `join_date`, `profile_picture
 (10, 'amy_adams', '2022-08-07', 'uploads/image1.png', 'Portland', '0000');
 
 --
--- Indexes for dumped tables
+-- Index pour les tables déchargées
 --
 
 --
--- Indexes for table `liked`
+-- Index pour la table `equipment`
+--
+ALTER TABLE `equipment`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Index pour la table `equipmentattachment`
+--
+ALTER TABLE `equipmentattachment`
+  ADD PRIMARY KEY (`equipmentid`,`uploadid`);
+
+--
+-- Index pour la table `liked`
 --
 ALTER TABLE `liked`
   ADD PRIMARY KEY (`user_id`,`post_id`);
 
 --
--- Indexes for table `post`
+-- Index pour la table `post`
 --
 ALTER TABLE `post`
   ADD PRIMARY KEY (`id`),
   ADD KEY `fk_post_user` (`posted_by`);
 
 --
--- Indexes for table `useraccount`
+-- Index pour la table `upload`
+--
+ALTER TABLE `upload`
+  ADD PRIMARY KEY (`uploadid`);
+
+--
+-- Index pour la table `useraccount`
 --
 ALTER TABLE `useraccount`
   ADD PRIMARY KEY (`user_id`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT pour les tables déchargées
 --
 
 --
--- AUTO_INCREMENT for table `post`
+-- AUTO_INCREMENT pour la table `equipment`
+--
+ALTER TABLE `equipment`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT pour la table `post`
 --
 ALTER TABLE `post`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
--- AUTO_INCREMENT for table `useraccount`
+-- AUTO_INCREMENT pour la table `upload`
+--
+ALTER TABLE `upload`
+  MODIFY `uploadid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT pour la table `useraccount`
 --
 ALTER TABLE `useraccount`
   MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
--- Constraints for dumped tables
+-- Contraintes pour les tables déchargées
 --
 
 --
--- Constraints for table `post`
+-- Contraintes pour la table `post`
 --
 ALTER TABLE `post`
   ADD CONSTRAINT `fk_post_user` FOREIGN KEY (`posted_by`) REFERENCES `useraccount` (`user_id`);

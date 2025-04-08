@@ -1,10 +1,11 @@
+import { Attachment } from "./Attachment";
+
 export interface EquipmentDisplay {
-    id: number;
+    id: string;
     name: string;
-    category: string;
-    specs: Record<string, string>;
-    price: string;
-    image: string;
-    isNew: boolean;
+    description : string;
+    price: number;
+    sellerid: number;
+    sellerusername: string
+    attachments: Attachment[];
   }
-  
