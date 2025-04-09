@@ -1,16 +1,27 @@
-<form (ngSubmit)="onSubmit()" enctype="multipart/form-data">
-    <h2>Add New Equipment</h2>
+<form (ngSubmit)="onSubmit()" enctype="multipart/form-data" class="equipment-form">
+    <h2 class="form-title">Add New Equipment</h2>
   
-    <label for="name">Name:</label>
-    <input type="text" id="name" [(ngModel)]="equipment.name" name="name" required />
+    <div class="form-group">
+        <label for="name" class="form-label">Name:</label>
+        <input type="text" id="name" [(ngModel)]="equipment.name" name="name" required class="form-input" />
+    </div>
   
-    <label for="description">Description:</label>
-    <textarea id="description" [(ngModel)]="equipment.description" name="description" required></textarea>
+    <div class="form-group">
+        <label for="description" class="form-label">Description:</label>
+        <textarea id="description" [(ngModel)]="equipment.description" name="description" required class="form-textarea"></textarea>
+    </div>
   
-    <label for="image">Image:</label>
-    <input type="file" id="image" (change)="onFileChange($event)" />
+    <div class="form-group">
+        <label for="image" class="form-label">Image:</label>
+        <div class="file-upload-wrapper">
+            <input type="file" id="image" (change)="onFileChange($event)" class="file-upload" />
+            <label for="image" class="file-upload-label">Choose File</label>
+            <span class="file-upload-text">No file chosen</span>
+        </div>
+    </div>
   
-    <button type="button" (click)="onCancel()">Cancel</button>
-    <button type="submit">Save</button>
-  </form>
-  
+    <div class="form-actions">
+        <button type="button" (click)="onCancel()" class="btn btn-cancel">Cancel</button>
+        <button type="submit" class="btn btn-submit">Save</button>
+    </div>
+</form>

@@ -14,7 +14,7 @@ export class NavbarMainRightComponent {
 
   addContentButtonOptions = [
     {label : 'new Post', onclick : () => {this.router.navigate(['/create-post'])}},
-    {label : 'new Equipement', onclick : () => {alert("Test")}},
+    {label : 'new Equipement', onclick : () => {this.router.navigate(['/add-equipments'])}},
     {label : 'new Course', onclick : () => {alert("Test")}},
   ];
 

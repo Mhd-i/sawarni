@@ -11,6 +11,7 @@ import { UserProfileEditComponent } from './components/user-profile-edit/user-pr
 import { PostDisplayComponent } from './components/content-displays/post-display/post-display.component';
 import { EquipmentDisplayComponent } from './components/equipment-display/equipment-display.component';
 import { EquipmentsViewComponent } from './components/content-views/equipments-view/equipments-view.component';
+import { AddEquipmentComponent } from './components/add-equipments/add-equipments.component';
 
 
 
@@ -61,7 +62,11 @@ export const routes: Routes = [
     path : 'view-courses',
     component : CoursesViewComponent
   },
-  
+  {
+    path : 'add-equipments',
+    component : AddEquipmentComponent,
+    canActivate : [AuthGuard]
+  },
     
   
 
