@@ -6,6 +6,7 @@ import { bootstrapApplication } from '@angular/platform-browser';
 @Component({
   selector: 'app-add-equipment',
   templateUrl: './add-equipments.component.html',
+  styleUrls: ['./add-equipments.component.css'],
   imports: [FormsModule]
 })
 export class AddEquipmentComponent {

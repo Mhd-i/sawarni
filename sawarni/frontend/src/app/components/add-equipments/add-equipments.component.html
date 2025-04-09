@@ -1,27 +1,36 @@
-<form (ngSubmit)="onSubmit()" enctype="multipart/form-data" class="equipment-form">
-    <h2 class="form-title">Add New Equipment</h2>
+<form (ngSubmit)="onSubmit()" enctype="multipart/form-data" class="container mt-5 p-4 bg-light rounded shadow-sm" style="max-width: 600px;">
+    <h2 class="text-center mb-4 text-primary">Add New Equipment</h2>
   
-    <div class="form-group">
-        <label for="name" class="form-label">Name:</label>
-        <input type="text" id="name" [(ngModel)]="equipment.name" name="name" required class="form-input" />
+    <div class="mb-3">
+        <label for="name" class="form-label fw-bold">Name</label>
+        <input type="text" class="form-control" id="name" 
+               [(ngModel)]="equipment.name" name="name" required
+               placeholder="Enter equipment name">
     </div>
   
-    <div class="form-group">
-        <label for="description" class="form-label">Description:</label>
-        <textarea id="description" [(ngModel)]="equipment.description" name="description" required class="form-textarea"></textarea>
+    <div class="mb-3">
+        <label for="description" class="form-label fw-bold">Description</label>
+        <textarea class="form-control" id="description" rows="4"
+                  [(ngModel)]="equipment.description" name="description" required
+                  placeholder="Enter detailed description"></textarea>
     </div>
   
-    <div class="form-group">
-        <label for="image" class="form-label">Image:</label>
-        <div class="file-upload-wrapper">
-            <input type="file" id="image" (change)="onFileChange($event)" class="file-upload" />
-            <label for="image" class="file-upload-label">Choose File</label>
-            <span class="file-upload-text">No file chosen</span>
+    <div class="mb-4">
+        <label for="image" class="form-label fw-bold">Image</label>
+        <div class="input-group">
+            <input type="file" class="form-control" id="image" 
+                   (change)="onFileChange($event)" aria-describedby="fileHelp">
         </div>
+        <div id="fileHelp" class="form-text">Upload a high-quality image (JPG, PNG)</div>
     </div>
   
-    <div class="form-actions">
-        <button type="button" (click)="onCancel()" class="btn btn-cancel">Cancel</button>
-        <button type="submit" class="btn btn-submit">Save</button>
+    <div class="d-flex justify-content-end gap-2">
+        <button type="button" (click)="onCancel()" 
+                class="btn btn-outline-danger px-4">
+            <i class="bi bi-x-circle me-2"></i>Cancel
+        </button>
+        <button type="submit" class="btn btn-primary px-4">
+            <i class="bi bi-save me-2"></i>Save
+        </button>
     </div>
 </form>
