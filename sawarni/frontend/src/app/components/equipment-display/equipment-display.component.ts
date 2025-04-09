@@ -1,6 +1,5 @@
 import { Component, Input, ElementRef, AfterViewInit, inject } from '@angular/core';
 import { trigger, state, style, transition, animate } from '@angular/animations';
-
 import { LikesService } from '../../services/likes.service';
 import { EquipmentsService } from '../../services/equipment.service';
 import { EquipmentDisplay } from '../../interfaces/EquipmentDisplay';
@@ -28,7 +27,7 @@ export class EquipmentDisplayComponent implements AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    //this.setupIntersectionObserver();
+    //  this.setupIntersectionObserver();
   }
 
   /* ------------------------- Private Methods ------------------------- */
@@ -49,7 +48,6 @@ export class EquipmentDisplayComponent implements AfterViewInit {
   /* ------------------------- Public Methods ------------------------- */
 
 
-
   /* ------------------------- Action Handlers ------------------------- */
 
-}
+} 
