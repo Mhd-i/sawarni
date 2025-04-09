@@ -1,0 +1,16 @@
+<form (ngSubmit)="onSubmit()" enctype="multipart/form-data">
+    <h2>Add New Equipment</h2>
+  
+    <label for="name">Name:</label>
+    <input type="text" id="name" [(ngModel)]="equipment.name" name="name" required />
+  
+    <label for="description">Description:</label>
+    <textarea id="description" [(ngModel)]="equipment.description" name="description" required></textarea>
+  
+    <label for="image">Image:</label>
+    <input type="file" id="image" (change)="onFileChange($event)" />
+  
+    <button type="button" (click)="onCancel()">Cancel</button>
+    <button type="submit">Save</button>
+  </form>
+  
