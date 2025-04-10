@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 08, 2025 at 08:14 AM
+-- Generation Time: Apr 10, 2025 at 08:22 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.0.30
 
@@ -24,63 +24,6 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `equipment`
---
-
-CREATE TABLE `equipment` (
-  `id` int(11) NOT NULL,
-  `name` varchar(200) NOT NULL,
-  `sellerId` int(11) DEFAULT NULL,
-  `description` varchar(200) DEFAULT NULL,
-  `price` float(100,3) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `equipment`
---
-
-INSERT INTO `equipment` (`id`, `name`, `sellerId`, `description`, `price`) VALUES
-(6, 'Camera 2', 1, 'balls', 10.000),
-(7, 'Camera 2', 1, 'balls', 10.000),
-(8, 'Camera 2', 1, 'balls', 10.000),
-(9, 'Camera 2', 1, 'balls', 10.000),
-(10, 'Camera 2', 1, 'balls', 10.000),
-(11, 'Camera 2', 1, 'balls', 10.000),
-(12, 'Camera 2', 1, 'balls', 10.000),
-(13, 'Camera 2', 1, 'balls', 10.000),
-(14, 'Camera 2', 1, 'balls', 10.000),
-(15, 'Camera 2', 1, 'balls', 10.000),
-(16, 'Camera 2', 1, 'balls', 10.000),
-(17, 'Camera 2', 1, 'balls', 10.000),
-(18, 'Camera 2', 1, 'balls', 10.000);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `equipmentattachment`
---
-
-CREATE TABLE `equipmentattachment` (
-  `equipmentId` int(11) NOT NULL,
-  `uploadId` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `equipmentattachment`
---
-
-INSERT INTO `equipmentattachment` (`equipmentId`, `uploadId`) VALUES
-(1, 9),
-(5, 23),
-(5, 24),
-(10, 25),
-(10, 26),
-(11, 27),
-(11, 28);
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `liked`
 --
 
@@ -89,6 +32,14 @@ CREATE TABLE `liked` (
   `post_id` int(11) NOT NULL,
   `like_datetime` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `liked`
+--
+
+INSERT INTO `liked` (`user_id`, `post_id`, `like_datetime`) VALUES
+(1, 41, '2025-04-09 12:08:14'),
+(2, 41, '2025-04-09 13:06:34');
 
 -- --------------------------------------------------------
 
@@ -152,7 +103,66 @@ INSERT INTO `message` (`id`, `senderid`, `receiverid`, `content`) VALUES
 (43, 2, 1, 'HHHHH'),
 (44, 1, 2, 'aaa'),
 (45, 2, 1, 'aa'),
-(46, 2, 2, 'yyy');
+(46, 2, 2, 'yyy'),
+(47, 3, 1, 'aa'),
+(48, 3, 1, 'aa'),
+(49, 3, 1, 'aa'),
+(50, 3, 4, 'bb'),
+(51, 3, 1, 'aa'),
+(52, 3, 1, 'p'),
+(53, 3, 1, 't'),
+(54, 3, 1, 'a'),
+(55, 3, 2, 'xx'),
+(56, 3, 4, 'cc'),
+(57, 3, 4, 'aa'),
+(58, 3, 2, 'dd'),
+(59, 3, 1, 'xx'),
+(60, 1, 2, 'aa'),
+(61, 1, 2, 'aa'),
+(62, 1, 2, 'aa'),
+(63, 1, 2, 'aa'),
+(64, 1, 2, 'aa'),
+(65, 1, 2, 'xx'),
+(66, 0, 1, 'aaa'),
+(67, 2, 1, 'aaa'),
+(68, 2, 1, 'aaa'),
+(69, 2, 1, 'aaa'),
+(70, 2, 1, 'aaa'),
+(71, 2, 1, 'aaa'),
+(72, 2, 1, 'aaa'),
+(73, 2, 1, 'aa'),
+(74, 2, 1, 'aa'),
+(75, 2, 1, 'aa'),
+(76, 2, 1, 'aaa'),
+(77, 2, 1, 'aaa'),
+(78, 2, 1, 'aaaddd'),
+(79, 2, 1, 'aaaddde'),
+(80, 2, 1, 'aa'),
+(81, 2, 1, 'aaa'),
+(82, 2, 1, 'hello'),
+(83, 1, 2, 'aa'),
+(84, 2, 1, 'nigga'),
+(85, 2, 1, 'nigga'),
+(86, 1, 2, 'aa'),
+(87, 1, 2, 'aa'),
+(88, 1, 1, 'aa'),
+(89, 2, 1, 'aaa'),
+(90, 1, 2, 'nigga'),
+(91, 2, 1, 'aaa'),
+(92, 1, 2, 'nigga'),
+(93, 2, 1, 'aa'),
+(94, 2, 1, 'hello'),
+(95, 2, 1, 'aa'),
+(96, 2, 1, 'a'),
+(97, 2, 1, 'aa'),
+(98, 2, 1, 'aaa'),
+(99, 2, 1, 'aaa'),
+(100, 2, 1, 'aaa'),
+(101, 2, 1, 'aa'),
+(102, 2, 1, 'd'),
+(103, 2, 1, 'aa'),
+(104, 1, 1, 'aa'),
+(105, 1, 2, 'ddd');
 
 -- --------------------------------------------------------
 
@@ -173,9 +183,13 @@ CREATE TABLE `post` (
 --
 
 INSERT INTO `post` (`id`, `posted_by`, `text_content`, `image_url`, `creation_date`) VALUES
-(40, 1, 'fafa', NULL, '2025-04-05'),
 (41, 2, 'tiroaza', NULL, '2025-04-05'),
-(42, 2, 'jane', NULL, '2025-04-05');
+(42, 2, 'jane', NULL, '2025-04-05'),
+(43, 1, 'hello', NULL, '2025-04-08'),
+(44, 1, 'hello', NULL, '2025-04-08'),
+(45, 1, 'hello', NULL, '2025-04-08'),
+(46, 1, 'RAHHHH', NULL, '2025-04-08'),
+(47, 1, 'RAHHHH', NULL, '2025-04-08');
 
 -- --------------------------------------------------------
 
@@ -204,7 +218,19 @@ INSERT INTO `postattachment` (`post_id`, `upload_id`) VALUES
 (41, 17),
 (41, 18),
 (41, 19),
-(42, 20);
+(42, 20),
+(44, 39),
+(44, 40),
+(45, 41),
+(45, 42),
+(46, 43),
+(46, 44),
+(47, 45),
+(47, 46),
+(48, 47),
+(48, 48),
+(49, 49),
+(49, 50);
 
 -- --------------------------------------------------------
 
@@ -242,7 +268,29 @@ INSERT INTO `upload` (`upload_id`, `file_path`, `file_type`) VALUES
 (25, '../uploads/2023-11-12_17-18-35.png', 'png'),
 (26, '../uploads/2023-11-18_14-34-58.png', 'png'),
 (27, 'uploads/../2023-11-12_17-18-35.png', 'png'),
-(28, 'uploads/../2023-11-18_14-34-58.png', 'png');
+(28, 'uploads/../2023-11-18_14-34-58.png', 'png'),
+(29, 'uploads/2023-11-13_20-18-11.png', 'png'),
+(30, 'uploads/2023-11-13_20-48-37.png', 'png'),
+(31, 'uploads/2023-11-13_20-18-11.png', 'png'),
+(32, 'uploads/2023-11-13_20-48-37.png', 'png'),
+(33, 'uploads/2023-11-13_20-18-11.png', 'png'),
+(34, 'uploads/2023-11-13_20-48-37.png', 'png'),
+(35, 'uploads/2023-11-13_20-18-11.png', 'png'),
+(36, 'uploads/2023-11-13_20-48-37.png', 'png'),
+(37, 'uploads/2023-11-13_20-18-11.png', 'png'),
+(38, 'uploads/2023-11-13_20-48-37.png', 'png'),
+(39, 'uploads/2023-11-13_20-18-11.png', 'png'),
+(40, 'uploads/2023-11-13_20-48-37.png', 'png'),
+(41, 'uploads/2023-11-13_20-18-11.png', 'png'),
+(42, 'uploads/2023-11-13_20-48-37.png', 'png'),
+(43, 'uploads/2023-11-13_20-18-11.png', 'png'),
+(44, 'uploads/2023-11-13_20-48-37.png', 'png'),
+(45, 'uploads/2023-11-13_20-18-11.png', 'png'),
+(46, 'uploads/2023-11-13_20-48-37.png', 'png'),
+(47, 'uploads/2023-11-13_20-18-11.png', 'png'),
+(48, 'uploads/2023-11-13_20-48-37.png', 'png'),
+(49, 'uploads/2023-11-13_20-18-11.png', 'png'),
+(50, 'uploads/2023-11-13_20-48-37.png', 'png');
 
 -- --------------------------------------------------------
 
@@ -299,18 +347,6 @@ INSERT INTO `userresume` (`userId`, `uploadId`) VALUES
 --
 
 --
--- Indexes for table `equipment`
---
-ALTER TABLE `equipment`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `equipmentattachment`
---
-ALTER TABLE `equipmentattachment`
-  ADD PRIMARY KEY (`equipmentId`,`uploadId`);
-
---
 -- Indexes for table `liked`
 --
 ALTER TABLE `liked`
@@ -352,28 +388,22 @@ ALTER TABLE `userresume`
 --
 
 --
--- AUTO_INCREMENT for table `equipment`
---
-ALTER TABLE `equipment`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
-
---
 -- AUTO_INCREMENT for table `message`
 --
 ALTER TABLE `message`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=106;
 
 --
 -- AUTO_INCREMENT for table `post`
 --
 ALTER TABLE `post`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
 
 --
 -- AUTO_INCREMENT for table `upload`
 --
 ALTER TABLE `upload`
-  MODIFY `upload_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+  MODIFY `upload_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
 
 --
 -- AUTO_INCREMENT for table `useraccount`

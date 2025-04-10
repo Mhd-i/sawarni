@@ -37,7 +37,7 @@ export class CreateEquipmentComponent {
     }
 
     // get user id
-    const userId = localStorage.getItem('loggedInUserId');
+    const userId = sessionStorage.getItem('loggedInUserId');
     if (!userId) throw new Error('User not logged in');
 
     // create form data
@@ -45,7 +45,7 @@ export class CreateEquipmentComponent {
     formData.append('name', this.equipment.name);
     formData.append('description', this.equipment.description);
     formData.append('price', this.equipment.price.toString());
-    formData.append('sellerId', localStorage.getItem('loggedInUserId') || '0');
+    formData.append('sellerId', sessionStorage.getItem('loggedInUserId') || '0');
     this.selectedFiles.forEach(
       (file, index) => {
         formData.append(`file${index}`, file, file.name);

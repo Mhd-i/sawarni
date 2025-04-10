@@ -13,7 +13,7 @@ import { ViewUserPostsComponent } from '../view-user-posts/view-user-posts.compo
 })
 export class UserProfileComponent implements OnInit {
 
-  private user_id : number = Number(localStorage.getItem('loggedInUserId'));
+  private user_id : number = Number(sessionStorage.getItem('loggedInUserId'));
   private overlayRef!: OverlayRef;
   displayed_profile = {
     'user_name' : '',
@@ -30,9 +30,8 @@ export class UserProfileComponent implements OnInit {
   private route = inject(ActivatedRoute);
   
   ngOnInit(): void {
-    console.log(this.user_id)
     this.route.params.subscribe(params => {
-      this.user_id = params['id'] || this.user_id;
+      this.user_id = params['id'];
       this.loadUserProfile(Number(this.user_id));
     });
 

@@ -11,7 +11,7 @@ import { Router } from '@angular/router';
   styleUrl: './user-profile-edit.component.css'
 })
 export class UserProfileEditComponent implements OnInit {
-  private user_id = Number(localStorage.getItem('loggedInUserId'));
+  private user_id = Number(sessionStorage.getItem('loggedInUserId'));
   private userService = inject(UserService);
   private router = inject(Router);
 
@@ -46,7 +46,7 @@ export class UserProfileEditComponent implements OnInit {
 
   onSave() : void {
     const formData = new FormData();
-    formData.append('user_id', localStorage.getItem("loggedInUserId")!);
+    formData.append('user_id', sessionStorage.getItem("loggedInUserId")!);
     formData.append('user_name', this.displayed_profile["user_name"]);
     formData.append('profile_picture_path', this.displayed_profile["profile_picture_path"].replace('http://localhost/sawarni/', ''));
     formData.append('location', this.displayed_profile["location"]);

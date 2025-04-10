@@ -8,24 +8,22 @@ import { ApiResponse } from '../interfaces/ApiResponse';
 })
 export class LikesService {
 
-  private apiUrl = 'http://localhost/sawarni/';
+  private apiUrl = 'http://localhost/sawarni/api/likes/';
 
   private http = inject(HttpClient);
 
-  addLike(user_id : number, post_id : number) : Observable<ApiResponse> {
+  addLike(postId : number) : Observable<ApiResponse> {
     const formData = new FormData();
-    formData.append('user_id', user_id.toString());
-    formData.append('post_id', post_id.toString());
+    formData.append('postId', postId.toString());
     
-    return this.http.post<ApiResponse>(this.apiUrl + 'addLike.php', formData)
+    return this.http.post<ApiResponse>(this.apiUrl + 'AddLike.php', formData)
   }
 
-  removeLike(user_id : number, post_id : number) : Observable<ApiResponse> {
+  removeLike(postId : number) : Observable<ApiResponse> {
     const formData = new FormData();
-    formData.append('user_id', user_id.toString());
-    formData.append('post_id', post_id.toString());
+    formData.append('postId', postId.toString());
 
-    return this.http.post<ApiResponse>(this.apiUrl + 'removeLike.php', formData);
+    return this.http.post<ApiResponse>(this.apiUrl + 'RemoveLike.php', formData);
   }
 
 }

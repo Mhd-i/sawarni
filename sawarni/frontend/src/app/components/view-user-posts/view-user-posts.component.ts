@@ -28,9 +28,7 @@ export class ViewUserPostsComponent implements OnInit {
   }
 
   loadUserPosts() {
-    const formData = new FormData();
-    formData.append('user_id', this.userId.toString());
-    this.postService.getUserPosts(formData)
+    this.postService.getUserPosts(this.userId)
       .subscribe({
         next: (result) => {
           if (result.ok) {

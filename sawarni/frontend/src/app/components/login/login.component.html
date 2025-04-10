@@ -14,12 +14,12 @@
   
                 <div class="form-outline form-white mb-4">
                   <label class="form-label" for="inputUsername">Username</label>
-                  <input [(ngModel)]="loginRequest.in_user_name" name="username" class="form-control form-control-lg" type="text" id="inputUsername" >
+                  <input [(ngModel)]="loginRequest.username" name="username" class="form-control form-control-lg" type="text" id="inputUsername" >
                 </div>
   
                 <div class="form-outline form-white mb-4">
                   <label class="form-label" for="inputPassword">Password</label>
-                  <input [(ngModel)]="loginRequest.in_password" name="password" class="form-control form-control-lg" type="password" id="inputPassword">
+                  <input [(ngModel)]="loginRequest.password" name="password" class="form-control form-control-lg" type="password" id="inputPassword">
                 </div>
   
                 <button class="btn btn-outline-light btn-lg px-5" (click)="onLogin()">Login</button>

@@ -1,7 +1,8 @@
 <?php
-    require 'vendor/autoload.php';
-    require 'router.php';
+    require '../vendor/autoload.php';
+    require 'Router.php';
     require 'handlers/MessageHandler.php';
+    require_once __DIR__ . '/../Helpers/Helpers.php';
 
     use Ratchet\MessageComponentInterface;
     use Ratchet\ConnectionInterface;
@@ -32,8 +33,25 @@ class MessageWebSocket implements MessageComponentInterface {
     }
 
     public function onOpen(ConnectionInterface $conn) {
-        $this->clients->attach($conn);
-        echo "New connection! ({$conn->resourceId})\n";
+        $queryString = $conn->httpRequest->getUri()->getQuery();
+        parse_str($queryString, $queryParams);
+
+        $userInfo = verifyToken($queryParams['token']);
+
+        if (!$userInfo) {
+            echo "Invalid Token\n";
+            $conn->close();
+        }
+        else {
+            $conn->clientData = [
+                'token' => $queryParams['token'],
+                'userId' => (int)$userInfo->id
+            ];
+
+            $this->clients->attach($conn);
+            echo "New connection! ({$conn->resourceId})\n";
+        }
+        
     }
 
     public function onMessage(ConnectionInterface $from, $msg) {

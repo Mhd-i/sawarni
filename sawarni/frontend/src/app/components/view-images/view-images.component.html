@@ -1,16 +1,16 @@
 <div class="d-inline-block">
-    @if (['jpeg', 'jpg', 'png'].includes(attachments[displayedImageIndex].file_type)) {
+    @if (['jpeg', 'jpg', 'png'].includes(attachments[displayedImageIndex].fileType)) {
         <img 
             class="img-fluid displayed-image" 
-            [src]="attachments[displayedImageIndex].file_path" 
+            [src]="attachments[displayedImageIndex].filePath" 
             (mousedown)="displayNextAttachment()">
     }
-    @if (['mp4'].includes(attachments[displayedImageIndex].file_type)) {
+    @if (['mp4'].includes(attachments[displayedImageIndex].fileType)) {
         <video  width="100%" 
                 controls
                 (mousedown)="displayNextAttachment()"
                 class="mt-2 displayed-video">
-            <source [src]="attachments[displayedImageIndex].file_path" type="video/mp4">
+            <source [src]="attachments[displayedImageIndex].filePath" type="video/mp4">
             Your browser does not support the video tag.
         </video>
     }

@@ -12,7 +12,7 @@ import { Router } from '@angular/router';
 })
 export class CreatePostComponent {
   selectedFiles: File[] = [];
-  text_content : string = '';
+  textContent : string = '';
 
   private router = inject(Router);
   private postService = inject(PostsService);
@@ -25,29 +25,15 @@ export class CreatePostComponent {
   }
 
   onUpload() {
-    if (this.selectedFiles.length === 0) {
-      alert('Please select atleast one file first');
-      return;
-    }
-
-    // get user id
-    const userId = localStorage.getItem('loggedInUserId');
-    if (!userId) throw new Error('User not logged in');
-
-    // create form data
-    const formData = new FormData();
-    formData.append('posted_by', userId);
-    formData.append('text_content', this.text_content);
-    this.selectedFiles.forEach(
-      (file, index) => {
-        formData.append(`file${index}`, file, file.name);
-      }
-    );
-
-    this.postService.addPost(formData)
+    this.postService.addPost(this.textContent, this.selectedFiles)
       .subscribe(
         (response) => {
-          console.log('File Uploaded Successfully', response);
+          if (response.ok) {
+            console.log('File Uploaded Successfully', response);
+          }
+          else {
+            console.error(response.message);
+          }
         },
         (error) => {
           console.error('Error Uploading File', error);

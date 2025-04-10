@@ -1,4 +1,3 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -13,21 +12,19 @@ import { LoginRequest } from '../../interfaces/LoginRequest';
 })
 export class LoginComponent {
 
-  http = inject(HttpClient);
-
-  constructor(private router : Router) {}
-
-  usersAccountService = inject(AuthService);
+  private router = inject(Router)
+  private authService = inject(AuthService);
 
   loginRequest : LoginRequest = {
-    in_user_name : '',
-    in_password : ''
+    username : '',
+    password : ''
   }
 
   onLogin() {
-    this.usersAccountService.login(this.loginRequest)
+    this.authService.login(this.loginRequest)
       .subscribe({
         next: (result) => {
+          console.log(result);
           if (result.ok) {
             this.router.navigate(['/explore-page']);
           } 

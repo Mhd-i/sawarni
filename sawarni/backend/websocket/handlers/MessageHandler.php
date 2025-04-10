@@ -1,21 +1,7 @@
 <?php
 
-    function verifyFieldsExist(array $obj, string ...$fields) : array {
-        $missingFields = [];
-
-        foreach($fields as $field) {
-            if (!isset($obj[$field])) {
-                $missingFields[] = $field;
-            }
-        }
-
-        if (!empty($missingFields)) {
-            return (['ok' => false, 'message' => 'missing some or all : ' . implode(', ', $missingFields), 'body' => null]);
-        }
-        return (['ok' => true, 'message' => 'all fields exist', 'body' => null]);
-    }
-
     use Ratchet\ConnectionInterface;
+    require_once __DIR__ . '/../../Helpers/Helpers.php';
 
     class MessageHandler {
         private PDO $db;
@@ -29,25 +15,31 @@
             $body = $data['body'];
 
             // verify fields exist
-            $res = verifyFieldsExist($body, 'senderid', 'receiverid', 'content');
+            $res = verifyFieldsExist($body, 'receiverid', 'content');
             if ($res['ok'] === false) {$from->send(json_encode($res)); return;}
 
             $stmt = $this->db->prepare("INSERT INTO message (senderid, receiverid, content) VALUES (:senderid, :receiverid, :content);");
+            
             $stmt->execute([
-                ':senderid' => $body['senderid'],
+                ':senderid' => $from->clientData['userId'],
                 ':receiverid' => $body['receiverid'],
                 ':content' => $body['content']
             ]);
 
             $responseBody = ['messageid' => $this->db->lastInsertId(),
-                             'senderid' => $body['senderid'],
+                             'senderid' => $from->clientData['userId'],
                              'receiverid' => $body['receiverid'],
                              'content' => $body['content']
                             ];
         
             foreach ($clients as $client) {
-                // $client is the ConnectionInterface object
-                $client->send(json_encode(['ok' => true, 'message' => 'message create', 'body' => $responseBody]));
+                if ($client->clientData['userId'] == $responseBody['receiverid'] || $client->clientData['userId'] == $responseBody['senderid'])
+                {
+                    $clid = $client->clientData['userId'];
+                    $rsid = $responseBody['receiverid'];
+                    echo "Message sent to ({$clid}, {$rsid})\n";
+                    $client->send(json_encode(['ok' => true, 'message' => 'message create', 'body' => $responseBody]));
+                }
             }
 
         }

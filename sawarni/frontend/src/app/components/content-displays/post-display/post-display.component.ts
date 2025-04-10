@@ -36,7 +36,6 @@ export class PostDisplayComponent implements AfterViewInit {
   @Input() post!: PostDisplay;
   @Input() displayOptions = {canEdit : true, canDelete : true};
 
-  liked : boolean = false;
   viewAllAttachments : boolean = false;
   animationState = 'hidden';
   private overlayRef!: OverlayRef;
@@ -49,12 +48,7 @@ export class PostDisplayComponent implements AfterViewInit {
 
 
   ngOnInit() {
-    if (this.post?.liked_by_users) {
-      const userId = localStorage.getItem('loggedInUserId') || '';
-      this.liked = this.post.liked_by_users.includes(userId);
-    }
-
-
+    
   }
 
   ngAfterViewInit() {
@@ -79,38 +73,33 @@ export class PostDisplayComponent implements AfterViewInit {
   }
 
   likePost() {
-    if (this.liked === false) {
-      this.likesService.addLike(Number(localStorage.getItem('loggedInUserId')), Number(this.post.id))
+    if (this.post.likedByThisUser === false) {
+      this.likesService.addLike(Number(this.post.id))
         .subscribe({
           next: (response) => {
-            this.liked = true;
-            this.post.likes_count++;
+            this.post.likedByThisUser = true;
+            this.post.likeCount++;
           },
           error: (err) => console.error('Error Adding like', err)
         });
     }
     else {
-      console.log(localStorage.getItem('loggedInUserId'))
-      this.likesService.removeLike(Number(localStorage.getItem('loggedInUserId')), Number(this.post.id))
+      console.log(sessionStorage.getItem('loggedInUserId'))
+      this.likesService.removeLike(Number(this.post.id))
         .subscribe({
           next: (response) => {
-            this.liked = false;
-            this.post.likes_count--;
+            this.post.likedByThisUser = false;
+            this.post.likeCount--;
           },
           error: (err) => console.error('Error Removing like', err)
         });;
-      this.liked = false;
+        this.post.likedByThisUser = false;
     }
       
   }
 
   deletePost() {
-    const userId = localStorage.getItem('loggedInUserId') || '';
-    const postId = this.post.id.toString();
-    const formData = new FormData();
-    formData.append('user_id', userId);
-    formData.append('post_id', postId);
-    this.postsService.deletePost(formData)
+    this.postsService.deletePost(this.post.id)
       .subscribe({
         next: (response) => {
           alert(response.message);

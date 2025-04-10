@@ -41,32 +41,19 @@ export const routes: Routes = [
     canActivate : [AuthGuard]
   },
   {
-    path : 'user-profile',
-    component : UserProfileComponent
-  },
-  {
     path : 'user-profile/:id',
-    component : UserProfileComponent
+    component : UserProfileComponent,
+    canActivate : [AuthGuard]
   },
   {
     path : 'user-profile-edit',
-    component : UserProfileEditComponent
-  },
-  {
-    path : 'view-posts',
-    component : PostsViewComponent
-  },
-  {
-    path : 'view-equipment',
-    component : EquipmentViewComponent
-  },
-  {
-    path : 'view-courses',
-    component : CoursesViewComponent
+    component : UserProfileEditComponent,
+    canActivate : [AuthGuard],
   },
   {
     path : 'contact/:userId',
-    component : ContactComponent
+    component : ContactComponent,
+    canActivate : [AuthGuard],
   },
 
 ];

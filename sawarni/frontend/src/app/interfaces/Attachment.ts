@@ -1,4 +1,4 @@
 export interface Attachment {
-    file_path : string;
-    file_type : string;
+    filePath : string;
+    fileType : string;
 }

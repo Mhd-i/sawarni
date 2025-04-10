@@ -1,49 +1,21 @@
-import { Injectable } from '@angular/core';
-import { Observable, Subject } from 'rxjs';
-import { webSocket, WebSocketSubject } from 'rxjs/webSocket';
+import { HttpClient } from '@angular/common/http';
+import { inject, Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import { ApiResponse } from '../interfaces/ApiResponse';
 
 @Injectable({
   providedIn: 'root'
 })
 export class MessageService {
-  private socket! : WebSocket;
-  private messageSubject = new Subject<any>();
 
-  connect (url : string) : void {
-    this.socket = new WebSocket(url);
-    
-    this.socket.onmessage = (event) => {
-      const data = JSON.parse(event.data);
-      this.messageSubject.next(data);
-    };
+  private apiUrl = 'http://localhost/sawarni/api/messages/';
 
-    this.socket.onerror = (error) => {
-      console.error('Websocket error : ', error);
-    };
+  private http = inject(HttpClient);
 
-    this.socket.onclose = () => {
-      console.warn('Websocket connection closed.');
-    };
+  getMessagesWith(otherUserId : number) : Observable<ApiResponse> {
+    const formData = new FormData();
+    formData.append('otherUserId', otherUserId.toString());
+    return this.http.post<ApiResponse>(this.apiUrl + 'GetMessagesWith.php', formData);
   }
 
-  sendMessage(message : any) : void {
-    if (this.socket && this.socket.readyState === WebSocket.OPEN) {
-      this.socket.send(JSON.stringify(message));
-    }
-    else {
-      console.warn('Websocket is not connected.');
-    }
-  }
-
-  get messages$() : Observable<any> {
-    return this.messageSubject.asObservable();
-  }
-
-  ngOnDestroy() : void {
-    this.socket?.close();
-  }
-
-
-
-  
 }
