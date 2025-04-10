@@ -1,0 +1,13 @@
+.body {
+    background-image: url('/assets/backgrounds/3.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    
+    /* Fixed attachment creates the scroll effect */
+    background-attachment: fixed;
+    
+    
+    /* Ensure full viewport coverage */
+    min-height: 100vh;
+}

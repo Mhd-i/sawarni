@@ -44,7 +44,7 @@
         ]
     ];
 
-    $jwt = JWT::encode($body, SECRET_KEY, 'HS256');
+    $jwt = JWT::encode($body, SECRET_KEY, 'HS256'); 
     respond(true, 'login successful', ['token' => $jwt]);
 
 ?>

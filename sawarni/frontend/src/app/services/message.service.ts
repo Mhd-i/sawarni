@@ -18,4 +18,8 @@ export class MessageService {
     return this.http.post<ApiResponse>(this.apiUrl + 'GetMessagesWith.php', formData);
   }
 
+  getRecentContacts() : Observable<ApiResponse> {
+    return this.http.post<ApiResponse>(this.apiUrl + 'GetRecentContacts.php', null);
+  }
+
 }

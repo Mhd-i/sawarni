@@ -6,7 +6,7 @@
     require __DIR__ . '/../../vendor/autoload.php';
     require_once __DIR__ . '/../..//Helpers/Helpers.php';
 
-    $userId = authorize(getallheaders())->id;
+    $userId = authorize()->id;
 
     verifyFieldsExist($_POST, 'textContent');
 
@@ -24,7 +24,7 @@
     
     $postId = $connection->lastInsertId();
     
-    $uploads = upload($connection, $_FILES, 'uploads/');
+    $uploads = upload($connection, $_FILES, '../../uploads/');
 
     foreach($uploads as $upload) {
         // Insert data in the Association Table PostAttachment

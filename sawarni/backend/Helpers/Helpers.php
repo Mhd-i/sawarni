@@ -80,14 +80,17 @@
         foreach ($files as $file) {
 
             // Get the correct File path and type
-            $uploadDir = 'uploads/';
             $fileName = basename($file['name']);
             $filePath = $uploadDirectory . $fileName;
             $fileExtention = (string)pathinfo($filePath, PATHINFO_EXTENSION);
-    
+            echo "TMP File name : " . $file['tmp_name'] . "\n";
+            echo " File path : " .$filePath . "\n";
+
             if (!move_uploaded_file($file['tmp_name'], $filePath)) {
                 respond(false, 'failed to move file');
             } 
+
+            $inDBPath = 'uploads/' . $fileName;
     
             $newUpload = query($connection,
                                 '
@@ -95,7 +98,7 @@
                                     VALUES(:filePath, :fileExtention);
                                 ',
                                 [
-                                    ':filePath' => $filePath,
+                                    ':filePath' => $inDBPath,
                                     ':fileExtention' => $fileExtention
                                 ]
                                 );

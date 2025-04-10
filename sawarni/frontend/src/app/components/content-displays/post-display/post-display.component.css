@@ -2,13 +2,23 @@
     will-change: transform, opacity;
     margin-bottom: 20px;
     overflow: hidden;
+    
+    
   }
   
   #header, #attachmentsContainer {
-    border: 1px solid #ccc;
-    background-color: #f9f9f9;
     transition: all 0.3s ease;
     border-radius: 8px;
+
+    
+    background: rgba( 255, 255, 255, 0.25 );
+    box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+    backdrop-filter: blur( 20px );
+    -webkit-backdrop-filter: blur( 20px );
+    border-radius: 10px;
+    
+       
+    
   }
   
   #header:hover, #attachmentsContainer:hover {
@@ -17,11 +27,18 @@
   }
   
   #textContainer {
-    border: 1px solid #ccc;
-    background-color: #ffffff;
     transition: all 0.3s ease;
-    border-radius: 8px;
+    border-radius: 15px;
     padding: 15px;
+
+    background: rgba( 255, 255, 255, 0.25 );
+    box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+    backdrop-filter: blur( 20px );
+    -webkit-backdrop-filter: blur( 20px );
+    border-radius: 10px;
+    
+
+
   }
   
   #textContainer:hover {
@@ -36,7 +53,6 @@
   
   #userDetails {
     font-size: 14px;
-    color: #b6b5b5;
   }
   
   #profilePicture {

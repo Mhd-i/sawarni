@@ -46,11 +46,6 @@ export class PostDisplayComponent implements AfterViewInit {
   private router = inject(Router);
   private overlay = inject(Overlay);
 
-
-  ngOnInit() {
-    
-  }
-
   ngAfterViewInit() {
     const options = {
       root: null,

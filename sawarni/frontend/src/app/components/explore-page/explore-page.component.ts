@@ -5,7 +5,7 @@ import { NavbarMainComponent } from '../explore-navbar/navbar-main/navbar-main.c
 
 @Component({
   selector: 'app-explore-page',
-  imports: [NavbarMainComponent, RouterOutlet],
+  imports: [RouterOutlet, NavbarMainComponent],
   templateUrl: './explore-page.component.html',
   styleUrl: './explore-page.component.css'
 })

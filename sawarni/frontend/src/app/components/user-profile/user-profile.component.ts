@@ -13,7 +13,7 @@ import { ViewUserPostsComponent } from '../view-user-posts/view-user-posts.compo
 })
 export class UserProfileComponent implements OnInit {
 
-  private user_id : number = Number(sessionStorage.getItem('loggedInUserId'));
+  private user_id : number = 0;
   private overlayRef!: OverlayRef;
   displayed_profile = {
     'user_name' : '',
@@ -130,6 +130,10 @@ export class UserProfileComponent implements OnInit {
 
   closeOverlay() : void {
     this.overlayRef.dispose();
+  }
+
+  onMessageButtonClick() {
+    this.router.navigate([`contact/${this.user_id}`]);
   }
 
 }
