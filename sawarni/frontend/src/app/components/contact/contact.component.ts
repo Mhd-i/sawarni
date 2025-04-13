@@ -56,7 +56,9 @@ export class ContactComponent implements OnInit, AfterViewChecked {
     this.messageWebsocketService.connect('ws://localhost:8081');
     
     this.messageWebsocketService.messages$.subscribe(msg => {
-      this.messages.push(msg.body);
+      if (msg.body.senderid == this.conversationWithUserId) {
+        this.messages.push(msg.body);
+      }
     });
 
     this.userService.getUserProfile(this.conversationWithUserId).subscribe({

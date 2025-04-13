@@ -50,7 +50,7 @@ export class PostDisplayComponent implements AfterViewInit {
     const options = {
       root: null,
       rootMargin: '0px',
-      threshold: 0.15 // Trigger when 15% of the post is visible
+      threshold: 0.15 
     };
 
     const observer = new IntersectionObserver((entries) => {
@@ -58,7 +58,6 @@ export class PostDisplayComponent implements AfterViewInit {
         if (entry.isIntersecting) {
           this.animationState = 'visible';
         } else {
-          // Optional: Reset to hidden when leaving viewport (for re-triggering)
           this.animationState = 'hidden';
         }
       });
@@ -87,7 +86,7 @@ export class PostDisplayComponent implements AfterViewInit {
             this.post.likeCount--;
           },
           error: (err) => console.error('Error Removing like', err)
-        });;
+        });
         this.post.likedByThisUser = false;
     }
       
@@ -124,10 +123,8 @@ export class PostDisplayComponent implements AfterViewInit {
     const portal = new ComponentPortal(ViewImagesComponent);
     const componentRef = this.overlayRef.attach(portal);
     
-    // Pass data directly to the component instance
     componentRef.instance.attachments = this.post.attachments;
     componentRef.instance.displayedImageIndex = displayedImageIndex;
-    // Make sure ViewImagesComponent has an @Input() for images
 
     this.overlayRef.backdropClick().subscribe(() => this.closeOverlay());
 

@@ -70,30 +70,25 @@ export class UserProfileComponent implements OnInit {
   }
   
   openViewPostsOverlay() : void {
-    // Create overlay
     this.overlayRef = this.overlay.create({
       hasBackdrop: true,
       positionStrategy: this.overlay.position()
         .global()
         .centerHorizontally()
         .centerVertically(),
-      scrollStrategy: this.overlay.scrollStrategies.block() // or .reposition()
+      scrollStrategy: this.overlay.scrollStrategies.block()
     });
 
-    // Attach component to overlay
     const portal = new ComponentPortal(ViewUserPostsComponent);
 
     const componentRef = this.overlayRef.attach(portal);
     
-    // Pass data directly to the component instance
     componentRef.instance.userId = this.user_id;
 
-    // Close on backdrop click
     this.overlayRef.backdropClick().subscribe(() => this.closeOverlay());
   }
 
   openViewEquipmentOverlay() : void {
-    // Create overlay
     this.overlayRef = this.overlay.create({
       hasBackdrop: true,
       positionStrategy: this.overlay.position()
@@ -102,16 +97,13 @@ export class UserProfileComponent implements OnInit {
         .centerVertically()
     });
 
-    // Attach component to overlay
     const portal = new ComponentPortal(ViewUserPostsComponent);
     this.overlayRef.attach(portal);
 
-    // Close on backdrop click
     this.overlayRef.backdropClick().subscribe(() => this.closeOverlay());
   }
 
   openViewCoursesOverlay() : void {
-    // Create overlay
     this.overlayRef = this.overlay.create({
       hasBackdrop: true,
       positionStrategy: this.overlay.position()
@@ -120,11 +112,9 @@ export class UserProfileComponent implements OnInit {
         .centerVertically()
     });
 
-    // Attach component to overlay
     const portal = new ComponentPortal(ViewUserPostsComponent);
     this.overlayRef.attach(portal);
 
-    // Close on backdrop click
     this.overlayRef.backdropClick().subscribe(() => this.closeOverlay());
   }
 
