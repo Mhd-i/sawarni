@@ -12,9 +12,11 @@ export class UserService {
 
   private http = inject(HttpClient);
 
-  getUserProfile(userId : number) : Observable<ApiResponse> {
+  getUserProfile(userId? : number) : Observable<ApiResponse> {
     const formData = new FormData();
-    formData.append('userId', userId.toString())
+    if (userId) {
+      formData.append('userId', userId.toString())
+    }
     return this.http.post<ApiResponse>(this.apiUrl + "GetUserProfile.php", formData)
   }
 
@@ -35,6 +37,5 @@ export class UserService {
   getLoggedInUserId() : Observable<ApiResponse> {
     return this.http.post<ApiResponse>(this.apiUrl + 'GetLoggedInUserId.php', null);
   }
-
 
 }

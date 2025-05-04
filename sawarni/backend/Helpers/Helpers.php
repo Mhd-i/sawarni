@@ -26,7 +26,6 @@
 
     function query(PDO $connection, string $statement, array $params, array $paramTypes = []) {
         try {
-            // Prepare the statement
             $stmt = $connection->prepare($statement);
             
 
@@ -41,7 +40,6 @@
             
             $stmt->execute();
 
-            // Fetch One result
             return $stmt->fetchAll(PDO::FETCH_ASSOC);
             
         } catch (PDOException $e) {
@@ -51,7 +49,6 @@
 
     function queryOne(PDO $connection, string $statement, array $params, array $paramTypes = []) {
         try {
-            // Prepare the statement
             $stmt = $connection->prepare($statement);
             
 
@@ -66,7 +63,6 @@
             
             $stmt->execute();
 
-            // Fetch One result
             return $stmt->fetch(PDO::FETCH_ASSOC);
             
         } catch (PDOException $e) {
@@ -79,12 +75,9 @@
 
         foreach ($files as $file) {
 
-            // Get the correct File path and type
             $fileName = basename($file['name']);
             $filePath = $uploadDirectory . $fileName;
             $fileExtention = (string)pathinfo($filePath, PATHINFO_EXTENSION);
-            echo "TMP File name : " . $file['tmp_name'] . "\n";
-            echo " File path : " .$filePath . "\n";
 
             if (!move_uploaded_file($file['tmp_name'], $filePath)) {
                 respond(false, 'failed to move file');
@@ -151,9 +144,9 @@
 
     function strarray(&$obj) : void {
         if (!empty($obj)) {
-            $obj = explode(',', $obj);  // Convert comma-separated string to an array
+            $obj = explode(',', $obj);
         } else {
-            $obj = [];  // Set an empty array if the string is empty or null
+            $obj = [];
         }
     }
 

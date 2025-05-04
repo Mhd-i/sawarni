@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 11, 2025 at 12:41 AM
+-- Generation Time: May 04, 2025 at 01:33 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.0.30
 
@@ -24,6 +24,60 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `courseattachment`
+--
+
+CREATE TABLE `courseattachment` (
+  `course_id` int(11) NOT NULL,
+  `upload_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `courseattachment`
+--
+
+INSERT INTO `courseattachment` (`course_id`, `upload_id`) VALUES
+(15, 38),
+(16, 40),
+(17, 42),
+(17, 43),
+(17, 44),
+(18, 46),
+(18, 47),
+(18, 48),
+(19, 50),
+(19, 51),
+(19, 52);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `courses`
+--
+
+CREATE TABLE `courses` (
+  `id` int(11) NOT NULL,
+  `title` varchar(200) NOT NULL,
+  `description` varchar(1000) NOT NULL,
+  `price` float(10,5) NOT NULL,
+  `creator_id` int(11) DEFAULT NULL,
+  `thumbnail_upload_id` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `courses`
+--
+
+INSERT INTO `courses` (`id`, `title`, `description`, `price`, `creator_id`, `thumbnail_upload_id`) VALUES
+(15, 'Course 1', 'course 1 description', 155.00000, 1, 37),
+(16, 'Course 1', 'course 1 description', 155.00000, 1, 39),
+(17, 'azdadz', 'dzadaz', 145.00000, 2, 41),
+(18, 'azdadz', 'dzadaz', 145.00000, 2, 45),
+(19, 'azdadz', 'dzadaz', 145.00000, 2, 49);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `liked`
 --
 
@@ -38,6 +92,10 @@ CREATE TABLE `liked` (
 --
 
 INSERT INTO `liked` (`user_id`, `post_id`, `like_datetime`) VALUES
+(1, 1, '2025-04-11 10:41:12'),
+(1, 3, '2025-04-16 00:20:29'),
+(1, 4, '2025-04-14 00:27:16'),
+(1, 5, '2025-04-11 10:21:07'),
 (3, 1, '2025-04-10 22:38:13'),
 (3, 3, '2025-04-10 22:38:15'),
 (3, 4, '2025-04-10 22:38:12'),
@@ -65,7 +123,27 @@ INSERT INTO `message` (`id`, `senderid`, `receiverid`, `content`, `sent_at`) VAL
 (4, 1, 2, 'hello', '2025-04-11 00:34:46'),
 (5, 1, 3, 'hi', '2025-04-11 00:35:12'),
 (6, 1, 5, 'aa', '2025-04-11 00:37:12'),
-(7, 1, 10, 'ddd', '2025-04-11 00:37:33');
+(7, 1, 10, 'ddd', '2025-04-11 00:37:33'),
+(8, 2, 1, 'hi', '2025-04-11 08:48:53'),
+(9, 1, 2, 'good morning', '2025-04-11 08:49:01'),
+(10, 2, 1, 'aa', '2025-04-11 08:49:13'),
+(11, 1, 2, 'aaa', '2025-04-14 00:30:48'),
+(12, 1, 2, 'aaa', '2025-04-14 00:30:55'),
+(13, 1, 2, 'aa', '2025-04-14 00:31:00'),
+(14, 1, 2, 'tttt', '2025-04-14 00:31:05'),
+(15, 1, 2, 'aaa', '2025-04-14 00:31:12'),
+(16, 1, 2, 'aaa', '2025-04-14 00:31:25'),
+(17, 1, 2, 'aaa', '2025-04-14 00:31:39'),
+(18, 1, 2, 'aa', '2025-04-14 00:33:01'),
+(19, 2, 1, 'hhh', '2025-04-14 00:36:15'),
+(20, 2, 2, 'hhh', '2025-04-14 00:36:27'),
+(21, 1, 2, 'aaa', '2025-04-14 00:36:39'),
+(22, 1, 10, 'aa', '2025-04-14 01:10:41'),
+(23, 1, 10, 'aaa', '2025-04-14 01:10:44'),
+(24, 2, 2, 'dazyu dhzadg ydazdaz', '2025-04-27 20:30:25'),
+(25, 2, 2, 'fejhz zudha dhjuaz dazuddzaoiu dhdazuio hd', '2025-04-27 20:30:33'),
+(26, 1, 2, 'duaz gdyhazg dujazghd zdgy azgduyi dhazodaz', '2025-04-27 20:32:27'),
+(27, 1, 2, 'dzahg adhuiazgy dujazhdu gdzytfd zdoaiug', '2025-04-27 20:32:33');
 
 -- --------------------------------------------------------
 
@@ -86,11 +164,11 @@ CREATE TABLE `post` (
 --
 
 INSERT INTO `post` (`id`, `posted_by`, `text_content`, `image_url`, `creation_date`) VALUES
-(1, 1, 'aaaa', NULL, '2025-04-10'),
 (3, 2, 'fedzfgr gter g faef  razf za azdza ', NULL, '2025-04-10'),
 (4, 2, 'hjfdhe bfhae vazgd iojdaz', NULL, '2025-04-10'),
 (5, 2, 'fjuia fbghaf tvgaz', NULL, '2025-04-10'),
-(8, 3, 'video', NULL, '2025-04-10');
+(8, 3, 'video', NULL, '2025-04-10'),
+(11, 1, 'dazda', NULL, '2025-04-14');
 
 -- --------------------------------------------------------
 
@@ -118,7 +196,36 @@ INSERT INTO `postattachment` (`post_id`, `upload_id`) VALUES
 (5, 8),
 (6, 9),
 (7, 10),
-(8, 11);
+(8, 11),
+(9, 12),
+(9, 13),
+(10, 14),
+(11, 15);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `subscriptions`
+--
+
+CREATE TABLE `subscriptions` (
+  `course_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `timestamp` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `subscriptions`
+--
+
+INSERT INTO `subscriptions` (`course_id`, `user_id`, `timestamp`) VALUES
+(1, 1, NULL),
+(1, 3, NULL),
+(14, 1, NULL),
+(15, 1, NULL),
+(15, 2, NULL),
+(16, 1, NULL),
+(17, 1, NULL);
 
 -- --------------------------------------------------------
 
@@ -147,7 +254,28 @@ INSERT INTO `upload` (`upload_id`, `file_path`, `file_type`) VALUES
 (8, 'uploads/pexels-lum3n-44775-167684.jpg', 'jpg'),
 (9, 'uploads/vd.mp4', 'mp4'),
 (10, 'uploads/pexels-brett-sayles-1431822.jpg', 'jpg'),
-(11, 'uploads/vd.mp4', 'mp4');
+(11, 'uploads/vd.mp4', 'mp4'),
+(12, 'uploads/2023-11-12_17-18-35.png', 'png'),
+(13, 'uploads/2023-11-18_14-34-58.png', 'png'),
+(14, 'uploads/vd.mp4', 'mp4'),
+(15, 'uploads/logo_dark.png', 'png'),
+(16, 'uploads/pdf1.pdf', 'pdf'),
+(37, 'uploads/course1.webp', 'webp'),
+(38, 'uploads/pexels-creative-vix-9754.jpg', 'jpg'),
+(39, 'uploads/course1.webp', 'webp'),
+(40, 'uploads/pexels-creative-vix-9754.jpg', 'jpg'),
+(41, 'uploads/signal-2025-04-05-164406_005.jpeg', 'jpeg'),
+(42, 'uploads/481035484_8933466520096423_4647936741498567879_n.mp4', 'mp4'),
+(43, 'uploads/cv_mehdi_bouzeffour (1) (1).pdf', 'pdf'),
+(44, 'uploads/cv_mehdi_bouzeffour (1).pdf', 'pdf'),
+(45, 'uploads/signal-2025-04-05-164406_005.jpeg', 'jpeg'),
+(46, 'uploads/481035484_8933466520096423_4647936741498567879_n.mp4', 'mp4'),
+(47, 'uploads/cv_mehdi_bouzeffour (1) (1).pdf', 'pdf'),
+(48, 'uploads/cv_mehdi_bouzeffour (1).pdf', 'pdf'),
+(49, 'uploads/signal-2025-04-05-164406_005.jpeg', 'jpeg'),
+(50, 'uploads/481035484_8933466520096423_4647936741498567879_n.mp4', 'mp4'),
+(51, 'uploads/cv_mehdi_bouzeffour (1) (1).pdf', 'pdf'),
+(52, 'uploads/cv_mehdi_bouzeffour (1).pdf', 'pdf');
 
 -- --------------------------------------------------------
 
@@ -171,7 +299,7 @@ CREATE TABLE `useraccount` (
 
 INSERT INTO `useraccount` (`user_id`, `user_name`, `join_date`, `profile_picture_path`, `location`, `password`, `aboutMe`) VALUES
 (1, 'john_doe', '2022-01-15', 'uploads/image1.png', 'New York', '0000', ''),
-(2, 'jane_smith', '2021-11-05', 'uploads/image1.png', 'Los Angeles', '0000', ''),
+(2, 'jane_smith', '2021-11-05', 'uploads/image1.png', 'Los Angeles', '0000', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus iaculis, magna at condimentum viverra, libero sapien cursus velit, ac dignissim nulla libero et metus. Suspendisse potenti. Aliquam erat volutpat. Nunc in suscipit turpis. Vivamus auctor orci in risus congue, ut malesuada nulla fringilla. Nam at mauris nec mi consequat lobortis. Nulla ultricies tincidunt augue, ut malesuada sem vestibulum nec. Mauris egestas tortor at ipsum egestas, ac cursus est ullamcorper.'),
 (3, 'mike_jones', '2023-03-22', 'uploads/image1.png', 'Chicago', '0000', ''),
 (4, 'sarah_wilson', '2022-07-30', 'uploads/image1.png', 'Miami', '0000', ''),
 (5, 'alex_green', '2023-01-10', 'uploads/image1.png', 'Seattle', '0000', ''),
@@ -197,6 +325,18 @@ CREATE TABLE `userresume` (
 --
 
 --
+-- Indexes for table `courseattachment`
+--
+ALTER TABLE `courseattachment`
+  ADD PRIMARY KEY (`course_id`,`upload_id`);
+
+--
+-- Indexes for table `courses`
+--
+ALTER TABLE `courses`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `liked`
 --
 ALTER TABLE `liked`
@@ -214,6 +354,12 @@ ALTER TABLE `message`
 ALTER TABLE `post`
   ADD PRIMARY KEY (`id`),
   ADD KEY `fk_post_user` (`posted_by`);
+
+--
+-- Indexes for table `subscriptions`
+--
+ALTER TABLE `subscriptions`
+  ADD PRIMARY KEY (`course_id`,`user_id`);
 
 --
 -- Indexes for table `upload`
@@ -238,22 +384,28 @@ ALTER TABLE `userresume`
 --
 
 --
+-- AUTO_INCREMENT for table `courses`
+--
+ALTER TABLE `courses`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+
+--
 -- AUTO_INCREMENT for table `message`
 --
 ALTER TABLE `message`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- AUTO_INCREMENT for table `post`
 --
 ALTER TABLE `post`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `upload`
 --
 ALTER TABLE `upload`
-  MODIFY `upload_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `upload_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
 
 --
 -- AUTO_INCREMENT for table `useraccount`

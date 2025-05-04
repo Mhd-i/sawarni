@@ -59,7 +59,7 @@
 
   <!-- Image -->
   @if (this.post.attachments.length > 0) {
-    <div id="attachmentsContainer" class="row pt-2 pb-2">
+    <div id="attachmentsContainer" class="row pt-2 pb-2 px-2">
       <div class="col">
         @if (viewAllAttachments) {
           @for (attachment of post.attachments; track attachment; let i = $index) {

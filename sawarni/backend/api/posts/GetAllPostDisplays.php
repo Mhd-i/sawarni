@@ -35,7 +35,6 @@
                     ]
                     );
     
-    // Check if any posts were found
     if (empty($posts)) {
         respond(false, 'no posts found');
     }
@@ -60,7 +59,6 @@
                         ]
                         );
         
-        // Transform each post's image_url
         foreach($attachments as &$attachment) {
             $attachment['filePath'] = $baseUrl . ltrim($attachment['filePath'], '/');
         }

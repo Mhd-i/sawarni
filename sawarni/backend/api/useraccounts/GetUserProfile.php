@@ -13,12 +13,13 @@
 
     $userProfile = query($connection,
                         '
-                            SELECT  ua.user_name, 
-                                    ua.profile_picture_path,
-                                    ua.join_date, 
-                                    ua.location, 
-                                    ua.aboutMe,
-                                    upl.file_path AS resume_path
+                            SELECT  ua.user_name as username, 
+                                    ua.user_id as userId,
+                                    ua.profile_picture_path as profilePicturePath,
+                                    ua.join_date as joinDate, 
+                                    ua.location as location, 
+                                    ua.aboutMe as aboutMe,
+                                    upl.file_path as resumePath
                             FROM useraccount AS ua
                             LEFT JOIN userresume AS ur ON ua.user_id = ur.userId
                             LEFT JOIN upload AS upl ON ur.uploadId = upl.upload_id
@@ -29,13 +30,12 @@
                         ]
     )[0];
         
-    // check if user with this id
     if (!$userProfile) {
         respond(false, "user doesn't exist");
     } 
 
-    $userProfile['profile_picture_path'] = $baseUrl . ltrim($userProfile['profile_picture_path'], '/');
-    $userProfile['resume_path'] = $baseUrl . ltrim($userProfile['resume_path'], '/');
+    $userProfile['profilePicturePath'] = $baseUrl . ltrim($userProfile['profilePicturePath'], '/');
+    $userProfile['resumePath'] = $baseUrl . ltrim($userProfile['resumePath'], '/');
 
     echo json_encode(["ok" => true, 'message' => 'success', 'body' => $userProfile]);
 ?>

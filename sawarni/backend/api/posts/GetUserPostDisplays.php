@@ -62,7 +62,6 @@
                         ]
                         );
         
-        // Transform each post's image_url
         foreach($attachments as &$attachment) {
             $attachment['filePath'] = $baseUrl . ltrim($attachment['filePath'], '/');
         }

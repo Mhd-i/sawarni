@@ -77,7 +77,10 @@ export class ContactComponent implements OnInit, AfterViewChecked {
 
   ngAfterViewChecked() {
     this.scrollToBottom();
-    this.otherPfP.nativeElement.src = this.conversationWithUserProfilePicturePath;
+  
+    if (this.conversationWithUserProfilePicturePath) {
+      this.otherPfP.nativeElement.src = this.conversationWithUserProfilePicturePath;
+    }
   }
   
   scrollToBottom() {

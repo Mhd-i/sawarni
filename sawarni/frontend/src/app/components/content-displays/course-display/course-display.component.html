@@ -1,0 +1,33 @@
+<div class="container">
+    <!--Header-->
+    <div id="header" class="row pt-3 pb-3 mt-3 mb-1 px-2">
+        <div class="col-9">
+            <h1>{{course.title}}</h1>
+            <h6>Made By {{course.creatorUsername}}</h6>
+        </div>
+        <div class="col d-flex align-items-center">
+            <h3>{{course.subscriberCount}} Subscribers</h3>
+        </div>
+    </div>
+
+    <!--Body-->
+    <div id="body" class="row pt-3 pb-3 mt-3 mb-1 px-2">
+        <img [src]="course.thumbnailPath">
+        <h3 class="mt-3">About : </h3>
+        <h5 class="mt-3 mx-3">{{course.description}}</h5>
+    </div>
+
+    <!--Footer-->
+    <div id="footer" class="row pt-3 pb-3 mt-3 mb-1 px-2">
+        @if (course.subscribedByThisUser) {
+            <button (click)="unSubscribeClick()" class="btn btn-danger">
+                <h3>Unsubscribe</h3>
+            </button>
+        }
+        @else {
+            <button (click)="subscribeClick()" class="btn btn-success">
+                <h3>{{course.price}} TND</h3>
+            </button>
+        }
+    </div>
+</div>

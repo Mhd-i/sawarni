@@ -43,11 +43,11 @@ export class UserProfileComponent implements OnInit {
     .subscribe({
       next: (result) => {
         if (result.ok) {
-          this.displayed_profile['user_name'] = result.body.user_name;
-          this.displayed_profile['profile_picture_path'] = result.body.profile_picture_path;
-          this.displayed_profile['join_date'] = result.body.join_date;
+          this.displayed_profile['user_name'] = result.body.username;
+          this.displayed_profile['profile_picture_path'] = result.body.profilePicturePath;
+          this.displayed_profile['join_date'] = result.body.joinDate;
           this.displayed_profile['location'] = result.body.location;
-          this.displayed_profile['resume_path'] = result.body.resume_path;
+          this.displayed_profile['resume_path'] = result.body.resumePath;
           this.displayed_profile['aboutMe'] = result.body.aboutMe;
         } 
         else {

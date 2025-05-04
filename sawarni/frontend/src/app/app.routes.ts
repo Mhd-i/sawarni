@@ -12,6 +12,9 @@ import { UserProfileEditComponent } from './components/user-profile-edit/user-pr
 import { PostsExploreComponent } from './components/content-explores/posts-explore/posts-explore.component';
 import { EquipmentsExploreComponent } from './components/content-explores/equipments-explore/equipments-explore.component';
 import { ContactComponent } from './components/contact/contact.component';
+import { MyCoursesComponent } from './components/my-courses/my-courses.component';
+import { StudyComponent } from './components/study/study.component';
+import { CreateCourseComponent } from './components/content-create/create-course/create-course.component';
 
 
 export const routes: Routes = [
@@ -29,7 +32,7 @@ export const routes: Routes = [
     component : ExplorePageComponent,
     canActivate : [AuthGuard],
     children: [
-      { path: 'posts', component: PostsExploreComponent },
+      { path: 'posts', component: PostsViewComponent },
       { path: 'equipment', component: EquipmentsExploreComponent },
       { path: 'courses', component: CoursesViewComponent },
       { path: '', redirectTo: 'posts', pathMatch: 'full' }
@@ -38,6 +41,11 @@ export const routes: Routes = [
   {
     path : 'create-post',
     component : CreatePostComponent,
+    canActivate : [AuthGuard]
+  },
+  {
+    path : 'create-course',
+    component : CreateCourseComponent,
     canActivate : [AuthGuard]
   },
   {
@@ -53,6 +61,16 @@ export const routes: Routes = [
   {
     path : 'contact/:userId',
     component : ContactComponent,
+    canActivate : [AuthGuard],
+  },
+  {
+    path : 'my-courses',
+    component : MyCoursesComponent,
+    canActivate : [AuthGuard],
+  },
+  {
+    path : 'study/:courseId',
+    component : StudyComponent,
     canActivate : [AuthGuard],
   },
 

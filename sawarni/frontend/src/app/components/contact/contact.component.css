@@ -1,20 +1,43 @@
-html, body {
-    height: 100%;
-    margin: 0;
-  }
+.body {
+  background-image: url('/assets/backgrounds/3.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
   
-  :host {
-    display: block;
-    height: 100%;
-  }
+  /* Fixed attachment creates the scroll effect */
+  background-attachment: fixed;
   
-  .container-fluid {
-    height: 100vh;
-  }
+  
+  /* Ensure full viewport coverage */
+  min-height: 100vh;
+}
 
-  .messages-container {
-    flex-grow: 1;
-    min-height: 0;
-    max-height: 100%;
-    overflow-y: auto;
-  }
+.glass {
+  background: rgba( 255, 255, 255, 0.25 );
+  box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+  backdrop-filter: blur( 20px );
+  -webkit-backdrop-filter: blur( 20px );
+  border-radius: 10px;
+}
+
+html, body {
+  height: 100%;
+  margin: 0;
+}
+
+  
+:host {
+  display: block;
+  height: 100%;
+}
+  
+.container-fluid {
+  height: 100vh;
+}
+
+.messages-container {
+  flex-grow: 1;
+  min-height: 0;
+  max-height: 100%;
+  overflow-y: auto;
+}

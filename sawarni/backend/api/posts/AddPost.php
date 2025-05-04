@@ -26,6 +26,8 @@
     
     $uploads = upload($connection, $_FILES, '../../uploads/');
 
+    
+
     foreach($uploads as $upload) {
         // Insert data in the Association Table PostAttachment
         query($connection,

@@ -13,8 +13,7 @@
 
         public function create(ConnectionInterface $from, $data, $clients) {
             $body = $data['body'];
-
-            // verify fields exist
+            
             $res = verifyFieldsExist($body, 'receiverid', 'content');
             if ($res['ok'] === false) {$from->send(json_encode($res)); return;}
 
@@ -47,7 +46,6 @@
         public function getMessagesBetween(ConnectionInterface $from, $data) {
             $body = $data['body'];
 
-            //verify fields exist
             $res = verifyFieldsExist($body, 'userid1', 'userid2');
             if ($res['ok'] === false) {$from->send(json_encode($res)); return;}
 

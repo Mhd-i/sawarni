@@ -24,7 +24,6 @@
                         ]
     )[0];
         
-    // check if user with this id
     if (!$userProfilePicture) {
         respond(false, "user doesn't exist");
     } 

@@ -12,6 +12,8 @@ import { LoginRequest } from '../../interfaces/LoginRequest';
 })
 export class LoginComponent {
 
+  errorMessage : string = '';
+
   private router = inject(Router)
   private authService = inject(AuthService);
 
@@ -29,7 +31,7 @@ export class LoginComponent {
             this.router.navigate(['/explore-page']);
           } 
           else {
-            alert(result.message);
+            this.errorMessage = result.message;
           }
         },
         error: (err) => {
@@ -37,5 +39,9 @@ export class LoginComponent {
           alert("An error occurred during login");
         }
       });
+  }
+
+  closeAlert() : void {
+    this.errorMessage = '';
   }
 }
