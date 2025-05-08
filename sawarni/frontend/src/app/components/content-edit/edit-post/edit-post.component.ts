@@ -36,14 +36,14 @@ export class EditPostComponent implements OnInit {
     this.postService.editPost(this.postId, this.textContent, this.selectedFiles).subscribe({
       next: (response) => {
         if (response.ok) {
-          console.log(response.message)
+          console.log(response.message);
         }
         else {
           console.error(response.message);
         }
       },
       error: (err) => {
-        console.error('');
+        console.error(err);
       }
     });
   }
