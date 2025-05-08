@@ -37,6 +37,7 @@ export class EditPostComponent implements OnInit {
       next: (response) => {
         if (response.ok) {
           console.log(response.message);
+          this.onCancel();
         }
         else {
           console.error(response.message);

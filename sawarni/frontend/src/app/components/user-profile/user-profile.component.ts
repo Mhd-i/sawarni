@@ -4,6 +4,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Overlay, OverlayRef } from '@angular/cdk/overlay';
 import { ComponentPortal } from '@angular/cdk/portal';
 import { ViewUserPostsComponent } from '../view-user-posts/view-user-posts.component';
+import { ViewUserCoursesComponent } from '../view-user-courses/view-user-courses.component';
+import { ViewUserEquipmentsComponent } from '../view-user-equipments/view-user-equipments.component';
 
 @Component({
   selector: 'app-user-profile',
@@ -103,7 +105,7 @@ export class UserProfileComponent implements OnInit {
     });
 
     // Attach component to overlay
-    const portal = new ComponentPortal(ViewUserPostsComponent);
+    const portal = new ComponentPortal(ViewUserEquipmentsComponent);
     this.overlayRef.attach(portal);
 
     // Close on backdrop click
@@ -121,7 +123,7 @@ export class UserProfileComponent implements OnInit {
     });
 
     // Attach component to overlay
-    const portal = new ComponentPortal(ViewUserPostsComponent);
+    const portal = new ComponentPortal(ViewUserCoursesComponent);
     this.overlayRef.attach(portal);
 
     // Close on backdrop click

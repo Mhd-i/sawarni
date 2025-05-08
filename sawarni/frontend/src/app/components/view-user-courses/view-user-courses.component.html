@@ -1,0 +1,25 @@
+<div class="container scroll-container">
+    <div class="row">
+        <div class="col">
+            @if (isLoading) {
+                <div class="loading">Loading Courses</div>
+            }
+            @else if (error) {
+                <div class="error">{{error}}</div>
+                <button >Retry</button>
+            }
+
+            @else {
+                @for(course of courses; track course) {
+                    <app-course-display [course]="course"></app-course-display>
+                } 
+                @empty {
+                    <div class="empty">No Courses available</div>
+                }
+
+            }
+        </div>
+    </div>
+</div>
+
+        

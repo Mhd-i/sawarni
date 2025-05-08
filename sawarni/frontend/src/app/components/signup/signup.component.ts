@@ -86,4 +86,8 @@ export class SignupComponent {
     }
   }
 
+  onSwitchToLogin() : void {
+    this.router.navigate(['login']);
+  }
+
 }

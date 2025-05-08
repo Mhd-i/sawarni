@@ -16,6 +16,12 @@ export class EquipmentService {
     return this.http.post<ApiResponse>(this.apiUrl + 'GetAllEquipmentDisplays.php', null);
   }
 
+  getUserEquipments(userId : number) : Observable<ApiResponse> {
+    const formData = new FormData();
+    formData.append('userId', userId.toString());
+    return this.http.post<ApiResponse>(this.apiUrl + 'GetUserEquipmentDisplays.php', formData);
+  }
+
   addEquipment(equipment : any, files : File[]) : Observable<ApiResponse> {
     const formData = new FormData();
     formData.append('name', equipment.name);

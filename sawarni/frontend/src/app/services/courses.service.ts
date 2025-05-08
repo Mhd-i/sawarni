@@ -52,4 +52,10 @@ export class CoursesService {
     return this.http.post<ApiResponse>(this.apiUrl + 'addCourse.php', formData);
   }
 
+  getUserCourses(userId : number) : Observable<ApiResponse> {
+    const formData = new FormData();
+    formData.append('userId', userId.toString());
+    return this.http.post<ApiResponse>(this.apiUrl + 'GetUserCourseDisplays.php', formData);
+  }
+
 }

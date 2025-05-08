@@ -1,0 +1,15 @@
+/* For the overlay pane */
+.cdk-overlay-pane {
+    max-height: 90vh; /* or whatever max height you want */
+    overflow-y: auto;
+  }
+  
+  /* Or for specific content */
+  .scroll-container {
+    max-height: 90vh;
+    width: 100vh;
+    overflow-y: auto;
+    background-color: white;
+  }
+  
+  

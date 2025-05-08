@@ -9,5 +9,5 @@ export interface PostDisplay {
     creationDate : string;
     likeCount : number;
     likedByUsers : string[];
-    likedByThisUser : boolean
+    likedByThisUser : boolean;
 }

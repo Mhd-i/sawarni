@@ -43,4 +43,9 @@ export class LoginComponent {
   closeAlert() : void {
     this.errorMessage = '';
   }
+
+  onSwitchToSignUp() : void {
+    this.router.navigate(['signup']);
+  }
+
 }
