@@ -13,8 +13,8 @@
     // Database connection and file upload logic here
     include_once("../connection.php");
 
-    // Retrieve Post Info from Frontend
-    $sellerId = $_POST['sellerId'];
+    
+
     $name = $_POST['name'];
     $description = $_POST['description'];
     $price = $_POST['price'];

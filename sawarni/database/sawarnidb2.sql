@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 04, 2025 at 01:33 PM
+-- Generation Time: May 08, 2025 at 10:13 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.0.30
 
@@ -78,6 +78,49 @@ INSERT INTO `courses` (`id`, `title`, `description`, `price`, `creator_id`, `thu
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `equipment`
+--
+
+CREATE TABLE `equipment` (
+  `id` int(11) NOT NULL,
+  `name` varchar(100) NOT NULL,
+  `sellerId` int(11) DEFAULT NULL,
+  `description` varchar(1000) DEFAULT NULL,
+  `price` float(100,2) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `equipment`
+--
+
+INSERT INTO `equipment` (`id`, `name`, `sellerId`, `description`, `price`) VALUES
+(1, 'rza za', 2, 'dzadza dza', 10.25),
+(2, 'bg re', 1, 'dzad azdazdaz dza', 121.50),
+(3, 'ezf ', 1, 'zefez', 0.00);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `equipmentattachment`
+--
+
+CREATE TABLE `equipmentattachment` (
+  `equipmentId` int(11) NOT NULL,
+  `uploadId` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `equipmentattachment`
+--
+
+INSERT INTO `equipmentattachment` (`equipmentId`, `uploadId`) VALUES
+(2, 54),
+(2, 55),
+(3, 56);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `liked`
 --
 
@@ -96,6 +139,7 @@ INSERT INTO `liked` (`user_id`, `post_id`, `like_datetime`) VALUES
 (1, 3, '2025-04-16 00:20:29'),
 (1, 4, '2025-04-14 00:27:16'),
 (1, 5, '2025-04-11 10:21:07'),
+(1, 11, '2025-05-07 10:12:37'),
 (3, 1, '2025-04-10 22:38:13'),
 (3, 3, '2025-04-10 22:38:15'),
 (3, 4, '2025-04-10 22:38:12'),
@@ -167,8 +211,7 @@ INSERT INTO `post` (`id`, `posted_by`, `text_content`, `image_url`, `creation_da
 (3, 2, 'fedzfgr gter g faef  razf za azdza ', NULL, '2025-04-10'),
 (4, 2, 'hjfdhe bfhae vazgd iojdaz', NULL, '2025-04-10'),
 (5, 2, 'fjuia fbghaf tvgaz', NULL, '2025-04-10'),
-(8, 3, 'video', NULL, '2025-04-10'),
-(11, 1, 'dazda', NULL, '2025-04-14');
+(8, 3, 'video', NULL, '2025-04-10');
 
 -- --------------------------------------------------------
 
@@ -200,7 +243,9 @@ INSERT INTO `postattachment` (`post_id`, `upload_id`) VALUES
 (9, 12),
 (9, 13),
 (10, 14),
-(11, 15);
+(11, 15),
+(12, 53),
+(13, 57);
 
 -- --------------------------------------------------------
 
@@ -275,7 +320,12 @@ INSERT INTO `upload` (`upload_id`, `file_path`, `file_type`) VALUES
 (49, 'uploads/signal-2025-04-05-164406_005.jpeg', 'jpeg'),
 (50, 'uploads/481035484_8933466520096423_4647936741498567879_n.mp4', 'mp4'),
 (51, 'uploads/cv_mehdi_bouzeffour (1) (1).pdf', 'pdf'),
-(52, 'uploads/cv_mehdi_bouzeffour (1).pdf', 'pdf');
+(52, 'uploads/cv_mehdi_bouzeffour (1).pdf', 'pdf'),
+(53, 'uploads/WhatsApp Image 2025-05-02 à 22.45.34_75f4fa44.jpg', 'jpg'),
+(54, 'uploads/WhatsApp Image 2025-05-02 à 22.45.33_c00b4e69.jpg', 'jpg'),
+(55, 'uploads/WhatsApp Image 2025-05-02 à 22.45.34_75f4fa44.jpg', 'jpg'),
+(56, 'uploads/WhatsApp Image 2025-05-02 à 22.45.34_75f4fa44.jpg', 'jpg'),
+(57, 'uploads/video3.mp4', 'mp4');
 
 -- --------------------------------------------------------
 
@@ -307,7 +357,9 @@ INSERT INTO `useraccount` (`user_id`, `user_name`, `join_date`, `profile_picture
 (7, 'david_clark', '2022-05-12', 'uploads/image1.png', 'Austin', '0000', ''),
 (8, 'lisa_taylor', '2023-02-28', 'uploads/image1.png', 'Denver', '0000', ''),
 (9, 'kevin_lee', '2021-12-25', 'uploads/image1.png', 'San Francisco', '0000', ''),
-(10, 'amy_adams', '2022-08-07', 'uploads/image1.png', 'Portland', '0000', '');
+(10, 'amy_adams', '2022-08-07', 'uploads/image1.png', 'Portland', '0000', ''),
+(14, 'hukl', '2025-05-04', 'uploads/WhatsApp Image 2025-05-02 à 22.46.00_153c6b36.jpg', 'ben arous', '1111', 'tt'),
+(17, 'test', '2025-05-04', 'uploads/signal-2025-04-05-164406_003.jpeg', 'Tunis', '5555', 'gbbg');
 
 -- --------------------------------------------------------
 
@@ -335,6 +387,18 @@ ALTER TABLE `courseattachment`
 --
 ALTER TABLE `courses`
   ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `equipment`
+--
+ALTER TABLE `equipment`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `equipmentattachment`
+--
+ALTER TABLE `equipmentattachment`
+  ADD PRIMARY KEY (`equipmentId`,`uploadId`);
 
 --
 -- Indexes for table `liked`
@@ -371,7 +435,8 @@ ALTER TABLE `upload`
 -- Indexes for table `useraccount`
 --
 ALTER TABLE `useraccount`
-  ADD PRIMARY KEY (`user_id`);
+  ADD PRIMARY KEY (`user_id`),
+  ADD UNIQUE KEY `uc_user_name` (`user_name`);
 
 --
 -- Indexes for table `userresume`
@@ -390,6 +455,12 @@ ALTER TABLE `courses`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
+-- AUTO_INCREMENT for table `equipment`
+--
+ALTER TABLE `equipment`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
 -- AUTO_INCREMENT for table `message`
 --
 ALTER TABLE `message`
@@ -399,19 +470,19 @@ ALTER TABLE `message`
 -- AUTO_INCREMENT for table `post`
 --
 ALTER TABLE `post`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `upload`
 --
 ALTER TABLE `upload`
-  MODIFY `upload_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
+  MODIFY `upload_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=58;
 
 --
 -- AUTO_INCREMENT for table `useraccount`
 --
 ALTER TABLE `useraccount`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- Constraints for dumped tables

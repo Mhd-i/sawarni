@@ -142,6 +142,17 @@
         }
     }
 
+    function tofloat(array &$obj, string ...$fields) : void {
+        if (!$fields) {
+            foreach($obj as $key => $value) {
+                $obj[$key] = floatval($value);
+            }
+        }
+        foreach($fields as $field) {
+            $obj[$field] = floatval($obj[$field]);
+        }
+    }
+
     function strarray(&$obj) : void {
         if (!empty($obj)) {
             $obj = explode(',', $obj);
