@@ -1,20 +1,25 @@
 import { AfterViewChecked, AfterViewInit, Component, ElementRef, HostListener, inject, OnInit, ViewChild } from '@angular/core';
-import { MessageWebsocketService } from '../../services/message.websocket.service';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { UserService } from '../../services/user.service';
-import { MessageService } from '../../services/message.service';
+import { ContactDisplay } from '../../../interfaces/ContactDisplay';
+import { MessageService } from '../../../services/message.service';
+import { MessageWebsocketService } from '../../../services/message.websocket.service';
+import { UserService } from '../../../services/user.service';
+import { ContactDisplayComponent } from '../contact-display/contact-display.component';
+import { MessageDisplay } from '../../../interfaces/MessageDisplay';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-contact',
-  imports: [FormsModule],
+  imports: [FormsModule, ContactDisplayComponent],
   templateUrl: './contact.component.html',
   styleUrl: './contact.component.css'
 })
 export class ContactComponent implements OnInit, AfterViewChecked {
   
-  message = '';
-  messages : any[] = [];
+  writtenMessage = '';
+  messages : MessageDisplay[] = [];
+  contacts : ContactDisplay[] = [];
 
   @ViewChild('messageContainer') messageContainer!: ElementRef;
   @ViewChild('otherpfp') otherPfP! : ElementRef;
@@ -27,6 +32,8 @@ export class ContactComponent implements OnInit, AfterViewChecked {
   private route = inject(ActivatedRoute);
   private router = inject(Router);
   private userService = inject(UserService);
+
+  private paramSubscription: Subscription | undefined;
 
   loggedInUserId : number = 0;
 
@@ -47,11 +54,24 @@ export class ContactComponent implements OnInit, AfterViewChecked {
 
     });
 
+    this.paramSubscription = this.route.params.subscribe(params => {
+      this.conversationWithUserId = Number(params['userId']);
+      this.messages = []; // Clear previous messages
+      
+      if (this.conversationWithUserId != 0) {
+        this.loadOldMessages();
+      }
+    });
+
     this.route.params.subscribe(params => {
       this.conversationWithUserId = Number(params['userId']);
     });
 
-    this.loadOldMessages();
+    if (this.conversationWithUserId != 0) {
+      this.loadOldMessages();
+    }
+
+    this.loadContacts();
 
     this.messageWebsocketService.connect('ws://localhost:8081');
     
@@ -73,6 +93,23 @@ export class ContactComponent implements OnInit, AfterViewChecked {
       }
     })
 
+  }
+
+  loadContacts() {
+    this.messageService.getRecentContacts().subscribe({
+      next: (response) => {
+        if (response.ok) {
+          this.contacts = response.body.recentContacts;
+          console.log('Loaded contacts:', this.contacts); // Add this line
+        }
+        else {
+          console.error(response.message);
+        }
+      },
+      error: (err) => {
+        console.error(err);
+      }
+    })
   }
 
   ngAfterViewChecked() {
@@ -105,17 +142,17 @@ export class ContactComponent implements OnInit, AfterViewChecked {
   }
 
   send() : void {
-    if (this.message.trim()) {
+    if (this.writtenMessage.trim()) {
       this.messageWebsocketService.sendMessage({type : 'message',
                                        action : 'create',
                                        body : {
                                          receiverid : this.conversationWithUserId,
-                                         content : this.message
+                                         content : this.writtenMessage
                                        }});
     }
 
     setTimeout(() => this.scrollToBottom(), 100);
-    this.message = '';
+    this.writtenMessage = '';
   }
 
   onProfileButtonClick() {

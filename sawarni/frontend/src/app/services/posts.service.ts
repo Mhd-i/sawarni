@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ApiResponse } from '../interfaces/ApiResponse';
+import { text } from 'stream/consumers';
 
 @Injectable({
   providedIn: 'root'
@@ -37,6 +38,18 @@ export class PostsService {
     const formData = new FormData();
     formData.append('userId', userId.toString());
     return this.http.post<ApiResponse>(this.apiUrl + 'GetUserPostDisplays.php', formData);
+  }
+
+  editPost(postId : number, textContent : string, selectedFiles : File[]) : Observable<ApiResponse> {
+    const formData = new FormData();
+    formData.append('postId', postId.toString());
+    formData.append('textContent', textContent);
+    selectedFiles.forEach(
+      (file, index) => {
+        formData.append(`file${index}`, file, file.name);
+      }
+    );
+    return this.http.post<ApiResponse>(this.apiUrl + 'EditPost.php', formData);
   }
 
 }

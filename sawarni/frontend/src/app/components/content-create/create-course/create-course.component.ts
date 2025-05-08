@@ -23,7 +23,8 @@ export class CreateCourseComponent {
     this.coursesService.addCourse(this.title, this.description, this.price, this.thumbnail, this.attachments).subscribe({
       next : (response) => {
         if (response.ok) {
-          
+          this.onCancel();
+          console.log('course added successfully', response);
         }
         else {
           console.error(response.message);
@@ -36,7 +37,7 @@ export class CreateCourseComponent {
   }
 
   onCancel() {
-    this.router.navigate(['/explore-page']);
+    this.router.navigate(['/explore-page'], { queryParams: { refresh: Date.now() } });
   }
 
   onThumbnailSelected(event : any) {

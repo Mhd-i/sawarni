@@ -38,4 +38,14 @@ export class UserService {
     return this.http.post<ApiResponse>(this.apiUrl + 'GetLoggedInUserId.php', null);
   }
 
+  addUser(username : string, password : string, location : string, aboutMe : string, profilePicture : File) : Observable<ApiResponse> {
+    const formData = new FormData();
+    formData.append('username', username);
+    formData.append('password', password);
+    formData.append('location', location);
+    formData.append('aboutMe', aboutMe);
+    formData.append('profilePicture', profilePicture, profilePicture.name);
+    return this.http.post<ApiResponse>(this.apiUrl + 'AddUser.php', formData);
+  }
+
 }

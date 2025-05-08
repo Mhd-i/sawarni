@@ -11,10 +11,13 @@ import { UserProfileComponent } from './components/user-profile/user-profile.com
 import { UserProfileEditComponent } from './components/user-profile-edit/user-profile-edit.component';
 import { PostsExploreComponent } from './components/content-explores/posts-explore/posts-explore.component';
 import { EquipmentsExploreComponent } from './components/content-explores/equipments-explore/equipments-explore.component';
-import { ContactComponent } from './components/contact/contact.component';
 import { MyCoursesComponent } from './components/my-courses/my-courses.component';
 import { StudyComponent } from './components/study/study.component';
 import { CreateCourseComponent } from './components/content-create/create-course/create-course.component';
+import { SignupComponent } from './components/signup/signup.component';
+import { ContactComponent } from './components/contacts/contact/contact.component';
+import { CreateEquipmentComponent } from './components/content-create/create-equipment/create-equipment.component';
+import { EditPostComponent } from './components/content-edit/edit-post/edit-post.component';
 
 
 export const routes: Routes = [
@@ -41,6 +44,11 @@ export const routes: Routes = [
   {
     path : 'create-post',
     component : CreatePostComponent,
+    canActivate : [AuthGuard]
+  },
+  {
+    path : 'create-equipment',
+    component : CreateEquipmentComponent,
     canActivate : [AuthGuard]
   },
   {
@@ -72,6 +80,14 @@ export const routes: Routes = [
     path : 'study/:courseId',
     component : StudyComponent,
     canActivate : [AuthGuard],
+  },
+  {
+    path : 'signup',
+    component : SignupComponent,
+  },
+  {
+    path : 'edit-post/:postId',
+    component : EditPostComponent,
   },
 
 ];

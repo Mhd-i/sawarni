@@ -98,13 +98,14 @@ export class PostDisplayComponent implements AfterViewInit {
       .subscribe({
         next: (response) => {
           alert(response.message);
+          this.router.navigate(['/explore-page'], { queryParams: { refresh: Date.now() } });
         },
         error: (err) => console.error('Error Deleting Post', err)
       });
   }
 
   editPost() {
-
+    this.router.navigate([`edit-post/${this.post.id}`]);
   }
   
   onProfilePictureClick() {

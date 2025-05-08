@@ -8,15 +8,24 @@ import { HttpClient } from '@angular/common/http';
 })
 export class EquipmentService {
 
-  private apiUrl = 'http://localhost/sawarni/equipment/';
+  private apiUrl = 'http://localhost/sawarni/api/equipment/';
   
   private http = inject(HttpClient);
 
   getAllEquipmentDisplays() : Observable<ApiResponse> {
-    return this.http.post<ApiResponse>(this.apiUrl + 'getAllEquipmentDisplays.php', null);
+    return this.http.post<ApiResponse>(this.apiUrl + 'GetAllEquipmentDisplays.php', null);
   }
 
-  addEquipment(formData : FormData) : Observable<ApiResponse> {
-    return this.http.post<ApiResponse>(this.apiUrl + 'addEquipment.php', formData);
+  addEquipment(equipment : any, files : File[]) : Observable<ApiResponse> {
+    const formData = new FormData();
+    formData.append('name', equipment.name);
+    formData.append('description', equipment.description);
+    formData.append('price', equipment.price.toString());
+    files.forEach(
+      (file, index) => {
+        formData.append(`file${index}`, file, file.name);
+      }
+    );
+    return this.http.post<ApiResponse>(this.apiUrl + 'AddEquipment.php', formData);
   }
 }

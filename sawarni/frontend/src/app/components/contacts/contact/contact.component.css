@@ -41,3 +41,37 @@ html, body {
   max-height: 100%;
   overflow-y: auto;
 }
+
+.contacts-column {
+  border-right: 1px solid #dee2e6;
+  height: 100vh;
+  overflow-y: auto;
+}
+.messages-container {
+  height: calc(100vh - 80px);
+  overflow-y: auto;
+}
+.message-input-container {
+  padding: 15px;
+  position: sticky;
+  bottom: 0;
+}
+.main-content {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.background {
+  background-image: url('/assets/backgrounds/3.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  
+  /* Fixed attachment creates the scroll effect */
+  background-attachment: fixed;
+  
+  
+  /* Ensure full viewport coverage */
+  min-height: 100vh;
+}

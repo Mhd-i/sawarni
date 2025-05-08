@@ -36,7 +36,6 @@ export class LoginComponent {
         },
         error: (err) => {
           console.error('Login error:', err);
-          alert("An error occurred during login");
         }
       });
   }

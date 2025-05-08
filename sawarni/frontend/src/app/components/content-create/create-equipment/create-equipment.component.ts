@@ -36,36 +36,24 @@ export class CreateEquipmentComponent {
       return;
     }
 
-    // get user id
-    const userId = sessionStorage.getItem('loggedInUserId');
-    if (!userId) throw new Error('User not logged in');
-
-    // create form data
-    const formData = new FormData();
-    formData.append('name', this.equipment.name);
-    formData.append('description', this.equipment.description);
-    formData.append('price', this.equipment.price.toString());
-    formData.append('sellerId', sessionStorage.getItem('loggedInUserId') || '0');
-    this.selectedFiles.forEach(
-      (file, index) => {
-        formData.append(`file${index}`, file, file.name);
-      }
-    );
-
-    this.equipmentService.addEquipment(formData)
+    this.equipmentService.addEquipment(this.equipment, this.selectedFiles)
       .subscribe(
         (response) => {
-          console.log('File Uploaded Successfully', response);
+          if (response.ok) {
+            console.log('File Uploaded Successfully', response);
+            this.onCancel()
+          }
+          else {
+            console.error(response.message);
+          }
         },
         (error) => {
           console.error('Error Uploading File', error);
         }
-  );;
-    
-    this.router.navigate(['/explore-page']);
+      );
   }
 
   onCancel() {
-    this.router.navigate(['/explore-page']);
+    this.router.navigate(['/explore-page'], { queryParams: { refresh: Date.now() } });
   }
 }

@@ -23,18 +23,17 @@ export class RecentContactsComponent implements OnInit {
     this.messagesService.getRecentContacts().subscribe({
       next: (response) => {
         if (response.ok) {
-          this.recentContacts = response.body.recentContacts.slice(0, 3);
+          this.recentContacts = response.body.recentContacts.slice(0, 5);
         }
         else {
           console.error(response.message);
         }
       },
-      error: (err) => console.error('Error Removing like', err)
+      error: (err) => console.error('error getting recent contacts', err)
     });
   }
 
   onClickContact(userId : number) {
-    console.warn('test');
     this.router.navigate([`contact/${userId}`]);
   }
 

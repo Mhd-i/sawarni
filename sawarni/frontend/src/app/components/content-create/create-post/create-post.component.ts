@@ -29,22 +29,21 @@ export class CreatePostComponent {
       .subscribe(
         (response) => {
           if (response.ok) {
-            console.log('File Uploaded Successfully', response);
+            console.log('Post Added Successfully', response);
+            this.onCancel()
           }
           else {
             console.error(response.message);
           }
         },
         (error) => {
-          console.error('Error Uploading File', error);
+          console.error('Error adding post', error);
         }
-  );;
-    
-    this.router.navigate(['/explore-page']);
+      );
   }
 
   onCancel() {
-    this.router.navigate(['/explore-page']);
+    this.router.navigate(['/explore-page'], { queryParams: { refresh: Date.now() } });
   }
 
 }

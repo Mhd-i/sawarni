@@ -20,6 +20,7 @@ export class AddContentComponent {
   }
   
   clickAddEquipment() : void {
+    this.router.navigate(['create-equipment']);
     this.closeOverlay();
   }
 

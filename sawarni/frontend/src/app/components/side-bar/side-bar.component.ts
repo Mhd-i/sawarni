@@ -69,6 +69,10 @@ export class SideBarComponent implements OnInit {
     this.router.navigate(['my-courses']);
   }
 
+  clickContacts() : void {
+    this.router.navigate(['contact/0']);
+  }
+
   clickAddContent() : void {
     this.overlayRef = this.overlay.create({
       hasBackdrop: true,
