@@ -1,0 +1,77 @@
+.body {
+  background-image: url('/assets/backgrounds/3.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  
+  /* Fixed attachment creates the scroll effect */
+  background-attachment: fixed;
+  
+  
+  /* Ensure full viewport coverage */
+  min-height: 100vh;
+}
+
+.glass {
+  background: rgba( 255, 255, 255, 0.25 );
+  box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+  backdrop-filter: blur( 20px );
+  -webkit-backdrop-filter: blur( 20px );
+  border-radius: 10px;
+}
+
+html, body {
+  height: 100%;
+  margin: 0;
+}
+
+  
+:host {
+  display: block;
+  height: 100%;
+}
+  
+.container-fluid {
+  height: 100vh;
+}
+
+.messages-container {
+  flex-grow: 1;
+  min-height: 0;
+  max-height: 100%;
+  overflow-y: auto;
+}
+
+.contacts-column {
+  border-right: 1px solid #dee2e6;
+  height: 100vh;
+  overflow-y: auto;
+}
+.messages-container {
+  height: calc(100vh - 80px);
+  overflow-y: auto;
+}
+.message-input-container {
+  padding: 15px;
+  position: sticky;
+  bottom: 0;
+}
+.main-content {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.background {
+  background-image: url('/assets/backgrounds/3.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  
+  /* Fixed attachment creates the scroll effect */
+  background-attachment: fixed;
+  
+  
+  /* Ensure full viewport coverage */
+  min-height: 100vh;
+}

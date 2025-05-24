@@ -3,43 +3,44 @@ import { inject, Injectable } from '@angular/core';
 import { Observable, tap } from 'rxjs';
 import { LoginRequest } from '../interfaces/LoginRequest';
 import { UserResponse } from '../interfaces/UserResponse';
+import { ApiResponse } from '../interfaces/ApiResponse';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
 })
 
 export class AuthService {
-  private apiUrl = 'http://localhost/sawarni/getUser.php';
+  private apiUrl = 'http://localhost/sawarni/Login.php';
   
-  private isAuthentificated = false;
   private http = inject(HttpClient);
+  private router = inject(Router);
 
   login(loginRequest : LoginRequest) : Observable<UserResponse> {
     const formData = new FormData();
-    formData.append('in_user_name', loginRequest.in_user_name);
-    formData.append('in_password', loginRequest.in_password);
+    formData.append('username', loginRequest.username);
+    formData.append('password', loginRequest.password);
 
-    return this.http.post<UserResponse>(this.apiUrl, formData).pipe(
+    return this.http.post<ApiResponse>(this.apiUrl, formData).pipe(
       tap((response: any) => {
         if (response.ok) {
-          this.isAuthentificated = true;
-          localStorage.setItem('isAuthentificated', 'true');
-          localStorage.setItem('loggedInUserId', response.body.user_id.toString());
+          localStorage.setItem('token', response.body.token);
         }
       })
     );
   }
 
-  isLoggedIn() {
-    return this.isAuthentificated;
+  logout() : void {
+    localStorage.removeItem('token');
+    this.router.navigate(['/login'])
   }
 
-/*
-  getUserWith(loginRequest : LoginRequest) : Observable<UserResponse> {
-    const formData = new FormData();
-    formData.append('in_user_name', loginRequest.in_user_name);
-    formData.append('in_password', loginRequest.in_password);
-    return this.http.post<any>(this.apiUrl, formData);
+  isLoggedIn() : boolean {
+    return !!localStorage.getItem('token');
   }
-*/
+
+  getToken() : string | null {
+    return localStorage.getItem('token');
+  }
+
 }

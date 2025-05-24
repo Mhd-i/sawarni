@@ -1,9 +1,23 @@
-<div class="container">
-    <app-navbar-main></app-navbar-main>
-    <div class="row mt-1">
-        <div class="offset-3 col-6">
+<div class="body">
+    <div class="row">
+        <div class="col-3 p-5 d-flex flex-column" style="height: 100vh;">
+            <app-side-bar></app-side-bar>
+            <div class="mt-auto">
+                <app-about-us></app-about-us>
+            </div>
+            
+        </div>
+        <div class="col-6">
+            <app-content-view-selector></app-content-view-selector>
             <app-search-bar></app-search-bar>
-            <router-outlet></router-outlet>
+            <div style="max-height: 90vh; overflow-y: auto;">
+                <router-outlet></router-outlet>
+            </div>
+        </div>
+        <div class="col-3 p-5">
+            <app-recent-contacts></app-recent-contacts>
         </div>
     </div>
 </div>
+    
+

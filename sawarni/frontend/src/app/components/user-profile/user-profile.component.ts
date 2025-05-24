@@ -4,6 +4,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Overlay, OverlayRef } from '@angular/cdk/overlay';
 import { ComponentPortal } from '@angular/cdk/portal';
 import { ViewUserPostsComponent } from '../view-user-posts/view-user-posts.component';
+import { ViewUserCoursesComponent } from '../view-user-courses/view-user-courses.component';
+import { ViewUserEquipmentsComponent } from '../view-user-equipments/view-user-equipments.component';
 
 @Component({
   selector: 'app-user-profile',
@@ -13,13 +15,15 @@ import { ViewUserPostsComponent } from '../view-user-posts/view-user-posts.compo
 })
 export class UserProfileComponent implements OnInit {
 
-  private user_id : number = Number(localStorage.getItem('loggedInUserId'));
+  private user_id : number = 0;
   private overlayRef!: OverlayRef;
   displayed_profile = {
     'user_name' : '',
     'profile_picture_path' : '',
     'join_date' : '',
-    'location' : ''
+    'location' : '',
+    'resume_path' : '',
+    'aboutMe' : ''
   }
 
   private userService = inject(UserService);
@@ -28,9 +32,8 @@ export class UserProfileComponent implements OnInit {
   private route = inject(ActivatedRoute);
   
   ngOnInit(): void {
-    console.log(this.user_id)
     this.route.params.subscribe(params => {
-      this.user_id = params['id'] || this.user_id;
+      this.user_id = params['id'];
       this.loadUserProfile(Number(this.user_id));
     });
 
@@ -42,10 +45,12 @@ export class UserProfileComponent implements OnInit {
     .subscribe({
       next: (result) => {
         if (result.ok) {
-          this.displayed_profile['user_name'] = result.body.user_name;
-          this.displayed_profile['profile_picture_path'] = result.body.profile_picture_path;
-          this.displayed_profile['join_date'] = result.body.join_date;
+          this.displayed_profile['user_name'] = result.body.username;
+          this.displayed_profile['profile_picture_path'] = result.body.profilePicturePath;
+          this.displayed_profile['join_date'] = result.body.joinDate;
           this.displayed_profile['location'] = result.body.location;
+          this.displayed_profile['resume_path'] = result.body.resumePath;
+          this.displayed_profile['aboutMe'] = result.body.aboutMe;
         } 
         else {
           alert(result.message);
@@ -100,7 +105,7 @@ export class UserProfileComponent implements OnInit {
     });
 
     // Attach component to overlay
-    const portal = new ComponentPortal(ViewUserPostsComponent);
+    const portal = new ComponentPortal(ViewUserEquipmentsComponent);
     this.overlayRef.attach(portal);
 
     // Close on backdrop click
@@ -118,7 +123,7 @@ export class UserProfileComponent implements OnInit {
     });
 
     // Attach component to overlay
-    const portal = new ComponentPortal(ViewUserPostsComponent);
+    const portal = new ComponentPortal(ViewUserCoursesComponent);
     this.overlayRef.attach(portal);
 
     // Close on backdrop click
@@ -127,6 +132,10 @@ export class UserProfileComponent implements OnInit {
 
   closeOverlay() : void {
     this.overlayRef.dispose();
+  }
+
+  onMessageButtonClick() {
+    this.router.navigate([`contact/${this.user_id}`]);
   }
 
 }

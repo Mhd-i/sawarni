@@ -9,6 +9,15 @@ import { CoursesViewComponent } from './components/content-views/courses-view/co
 import { CreatePostComponent } from './components/content-create/create-post/create-post.component';
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
 import { UserProfileEditComponent } from './components/user-profile-edit/user-profile-edit.component';
+import { PostsExploreComponent } from './components/content-explores/posts-explore/posts-explore.component';
+import { EquipmentsExploreComponent } from './components/content-explores/equipments-explore/equipments-explore.component';
+import { MyCoursesComponent } from './components/my-courses/my-courses.component';
+import { StudyComponent } from './components/study/study.component';
+import { CreateCourseComponent } from './components/content-create/create-course/create-course.component';
+import { SignupComponent } from './components/signup/signup.component';
+import { ContactComponent } from './components/contacts/contact/contact.component';
+import { CreateEquipmentComponent } from './components/content-create/create-equipment/create-equipment.component';
+import { EditPostComponent } from './components/content-edit/edit-post/edit-post.component';
 
 
 export const routes: Routes = [
@@ -27,9 +36,9 @@ export const routes: Routes = [
     canActivate : [AuthGuard],
     children: [
       { path: 'posts', component: PostsViewComponent },
-      { path: 'equipment', component: EquipmentViewComponent },
+      { path: 'equipment', component: EquipmentsExploreComponent },
       { path: 'courses', component: CoursesViewComponent },
-      { path: '', redirectTo: 'posts', pathMatch: 'full' } // Default child
+      { path: '', redirectTo: 'posts', pathMatch: 'full' }
     ]
   },
   {
@@ -38,28 +47,47 @@ export const routes: Routes = [
     canActivate : [AuthGuard]
   },
   {
-    path : 'user-profile',
-    component : UserProfileComponent
+    path : 'create-equipment',
+    component : CreateEquipmentComponent,
+    canActivate : [AuthGuard]
+  },
+  {
+    path : 'create-course',
+    component : CreateCourseComponent,
+    canActivate : [AuthGuard]
   },
   {
     path : 'user-profile/:id',
-    component : UserProfileComponent
+    component : UserProfileComponent,
+    canActivate : [AuthGuard]
   },
   {
     path : 'user-profile-edit',
-    component : UserProfileEditComponent
+    component : UserProfileEditComponent,
+    canActivate : [AuthGuard],
   },
   {
-    path : 'view-posts',
-    component : PostsViewComponent
+    path : 'contact/:userId',
+    component : ContactComponent,
+    canActivate : [AuthGuard],
   },
   {
-    path : 'view-equipment',
-    component : EquipmentViewComponent
+    path : 'my-courses',
+    component : MyCoursesComponent,
+    canActivate : [AuthGuard],
   },
   {
-    path : 'view-courses',
-    component : CoursesViewComponent
+    path : 'study/:courseId',
+    component : StudyComponent,
+    canActivate : [AuthGuard],
+  },
+  {
+    path : 'signup',
+    component : SignupComponent,
+  },
+  {
+    path : 'edit-post/:postId',
+    component : EditPostComponent,
   },
 
 ];

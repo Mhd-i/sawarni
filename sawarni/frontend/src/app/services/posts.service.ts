@@ -8,25 +8,47 @@ import { ApiResponse } from '../interfaces/ApiResponse';
 })
 export class PostsService {
 
-  private apiUrl = 'http://localhost/sawarni/';
+  private apiUrl = 'http://localhost/sawarni/api/posts/';
 
   private http = inject(HttpClient);
 
-
-  getPosts() : Observable<ApiResponse> {
-    return this.http.post<ApiResponse>(this.apiUrl + 'getPostDisplays.php', null);
+  getAllPostDisplays() : Observable<ApiResponse> {
+    return this.http.post<ApiResponse>(this.apiUrl + 'GetAllPostDisplays.php', null);
   }
 
-  addPost(postFormData : FormData) : Observable<ApiResponse> {
-    return this.http.post<ApiResponse>(this.apiUrl + 'addPost.php', postFormData);
+  addPost(textContent : string, selectedFiles : File[]) : Observable<ApiResponse> {
+    const formData = new FormData();
+    formData.append('textContent', textContent);
+    selectedFiles.forEach(
+      (file, index) => {
+        formData.append(`file${index}`, file, file.name);
+      }
+    );
+    return this.http.post<ApiResponse>(this.apiUrl + 'AddPost.php', formData);
   }
 
-  deletePost(formData : FormData) : Observable<ApiResponse> {
-    return this.http.post<ApiResponse>(this.apiUrl + 'deletePost.php', formData);
+  deletePost(postId : number) : Observable<ApiResponse> {
+    const formData = new FormData();
+    formData.append('postId', postId.toString());
+    return this.http.post<ApiResponse>(this.apiUrl + 'DeletePost.php', formData);
   }
 
-  getUserPosts(formData : FormData) : Observable<ApiResponse> {
-    return this.http.post<ApiResponse>(this.apiUrl + 'getUserPostDisplays.php', formData);
+  getUserPosts(userId : number) : Observable<ApiResponse> {
+    const formData = new FormData();
+    formData.append('userId', userId.toString());
+    return this.http.post<ApiResponse>(this.apiUrl + 'GetUserPostDisplays.php', formData);
+  }
+
+  editPost(postId : number, textContent : string, selectedFiles : File[]) : Observable<ApiResponse> {
+    const formData = new FormData();
+    formData.append('postId', postId.toString());
+    formData.append('textContent', textContent);
+    selectedFiles.forEach(
+      (file, index) => {
+        formData.append(`file${index}`, file, file.name);
+      }
+    );
+    return this.http.post<ApiResponse>(this.apiUrl + 'EditPost.php', formData);
   }
 
 }

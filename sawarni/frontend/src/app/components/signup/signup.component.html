@@ -1,0 +1,76 @@
+<section class="vh-100 position-relative">
+    <video autoplay muted loop class="bg-video">
+      <source src="assets\videos\vd.mp4"  type="video/mp4"  >
+    </video>
+  
+    <div class="container py-5 h-100 position-relative">
+      <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+          <div class="card login-container text-white" style="border-radius: 1rem;">
+            <div class="card-body p-5 text-center">
+              <div class="mb-md-5 mt-md-4 pb-5">
+                <h2 class="fw-bold mb-2 text-uppercase">Sign Up</h2>
+
+                <p class="text-white-50 mb-5">Create a new Account or <a class="link" (click)="onSwitchToLogin()">login</a></p>
+                
+                
+                <div class="form-outline form-white mb-4">
+                  <label class="form-label" for="inputUsername">Username</label>
+                  <input [(ngModel)]="username" name="username" class="form-control form-control-lg" type="text" id="inputUsername" >
+                </div>
+  
+                <div class="form-outline form-white mb-4">
+                  <label class="form-label" for="inputPassword">Password</label>
+                  <input [(ngModel)]="password" name="password" class="form-control form-control-lg" type="password" id="inputPassword">
+                </div>
+
+                <div class="form-outline form-white mb-4">
+                    <label class="form-label" for="location">Location</label>
+                    <input [(ngModel)]="location" name="location" class="form-control form-control-lg" type="text" id="location">
+                </div>
+
+                <div class="form-outline form-white mb-4">
+                    <label class="form-label" for="aboutMe">About me</label>
+                    <input [(ngModel)]="aboutMe" name="aboutMe" class="form-control form-control-lg" type="text" id="aboutMe">
+                </div>
+
+                <div class="form-outline form-white mb-4">
+                    <h3 class="form-label mt-3">Profile Picture : </h3>
+                    <input style="background-color: rgba(255, 255, 255, 0.5);" type="file" class="form-control" (change)="onFileSelected($event)">
+                </div>
+  
+                <button class="btn btn-outline-light btn-lg px-5" (click)="onSignUp()">Sign Up</button>
+  
+                <div class="d-flex justify-content-center text-center mt-4 pt-1">
+                  <a href="#!" class="text-white"><i class="fab fa-facebook-f fa-lg"></i></a>
+                  <a href="#!" class="text-white"><i class="fab fa-twitter fa-lg mx-4 px-2"></i></a>
+                  <a href="#!" class="text-white"><i class="fab fa-google fa-lg"></i></a>
+                </div>
+              </div>
+  
+              <p class="mb-0">welcome to sawarni<a href="#!" class="text-white-50 fw-bold">  help</a></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+</section>
+
+  <!-- Fixed Danger Alert -->
+    @if (errorMessage != "") {
+    <div class="col">
+      <div class="fixed-danger-alert alert alert-dismissible fade show fixed-to" role="alert">
+        <div class="d-flex">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-exclamation-triangle-fill flex-shrink-0 me-2" viewBox="0 0 16 16">
+            <path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
+          </svg>
+          <div>
+            <h4 class="alert-heading">Warning!</h4>
+            <p style="font-size: large;">{{errorMessage}}</p>
+          </div>
+        </div>
+        <button (click)="closeAlert()" type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+    </div>
+  }
+  

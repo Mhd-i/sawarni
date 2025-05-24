@@ -24,7 +24,6 @@ export class PostsViewComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.queryParamMap.subscribe(params => {
-      console.log(params.get('displayOptions'))
       this.displayOptions = params.get('displayOptions') || 'all';
       this.user_id = params.get('user_id') || '0';
     })
@@ -49,7 +48,7 @@ export class PostsViewComponent implements OnInit {
     this.error = null;
 
 
-    this.postService.getPosts()
+    this.postService.getAllPostDisplays()
       .subscribe({
         next : (result) => {
           if (result.ok) {

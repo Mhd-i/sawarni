@@ -1,1 +1,26 @@
-<p>courses-view works!</p>
+<div class="container">
+    <div class="row">
+        <div class="col">
+            @if (isLoading) {
+                <div class="loading">Loading Courses</div>
+            }
+            @else if (error) {
+                <div class="error">{{error}}</div>
+                <button (click)="loadCourses()">Retry</button>
+            }
+
+            @else {
+                
+                @for(course of courses; track course.id) {
+                    <app-course-display [course]="course"></app-course-display>
+                } 
+                @empty {
+                    <div class="empty">No posts available</div>
+                }
+
+            }
+        </div>
+    </div>
+</div>
+
+        

@@ -1,0 +1,23 @@
+<div class="glass">
+  <div class="container p-0 mb-2 mt-2">
+    <div class="row g-0 align-items-center">
+      <div class="col">
+        <button class="btn w-100 p-3 d-flex align-items-center shadow-sm" 
+                (click)="changeContact()">
+            <div class="me-3">
+                <img  [src]="contact.profilePicturePath" 
+                      class="rounded-circle border border-2 border-primary"
+                      height="60px"
+                      width="60px"
+                      alt="{{contact.profilePicturePath}} profile picture">
+            </div>
+            
+            <div class="text-start">
+                <h5 class="mb-0 fw-bold">{{contact.username}}</h5>
+            </div> 
+        </button>
+  
+      </div>
+    </div>
+  </div>
+</div>

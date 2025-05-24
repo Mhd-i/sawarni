@@ -1,0 +1,69 @@
+<div class="background">
+  <div class="container-fluid vh-100">
+    <div class="row h-100 g-0">
+        <!-- Contacts Column -->
+        <div class="col-2 contacts-column">
+            <div class="p-3">
+                @for (contact of contacts; track contact) {
+                  <app-contact-display 
+                    [contact]="contact">
+                  </app-contact-display>
+                }
+            </div>
+        </div>
+        
+        <!-- Messages Column with Input -->
+        <div class="col-10 main-content">
+            <!-- Scrollable Messages Area -->
+            <div class="messages-container p-3">
+                @for (message of messages; track message) {
+                  @if (message.senderId == loggedInUserId) {
+                    <div class="container d-flex justify-content-start ">
+                      <div class="p-3 mb-3 rounded glass" 
+                        style="background: rgba(168, 176, 255, 0.25);; min-width: 40%">
+                        <div class="d-flex align-items-center mb-2">
+                            <img [src]="message.senderProfilePicture" 
+                                class="rounded-circle me-2" 
+                                width="40" 
+                                height="40"
+                                [alt]="message.senderId">
+                            <strong>{{message.senderUserName}}</strong>
+                        </div>
+                        <p class="mb-0" style="font-size: large;">{{message.content}}</p>
+                      </div>
+                    </div>
+                  }
+                  @else {
+                    <div class="container d-flex justify-content-end">
+                      <div class="p-3 mb-3 rounded w-60 glass" 
+                        style="min-width: 40%;">
+                        <div class="d-flex align-items-center mb-2">
+                            <img [src]="message.senderProfilePicture" 
+                                class="rounded-circle me-2" 
+                                width="40" 
+                                height="40"
+                                [alt]="message.senderId">
+                            <strong>{{message.senderUserName}}</strong>
+                        </div>
+                        <p class="mb-0" style="font-size: large;">{{message.content}}</p>
+                      </div>
+                    </div>
+                  }
+                }
+            </div>
+            
+            <!-- Fixed Message Input Area -->
+            <div class="container message-input-container p-3">
+              <div class="input-group">
+                <input type="text" 
+                       class="form-control" 
+                       placeholder="Type your message here...">
+                <button class="btn btn-primary" type="button">Send</button>
+              </div>
+            </div>
+            
+        </div>
+    </div>
+  </div>
+</div>
+

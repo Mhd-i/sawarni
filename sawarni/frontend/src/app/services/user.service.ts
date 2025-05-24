@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, ObservableInput } from 'rxjs';
 import { ApiResponse } from '../interfaces/ApiResponse';
 
 @Injectable({
@@ -8,23 +8,44 @@ import { ApiResponse } from '../interfaces/ApiResponse';
 })
 export class UserService {
 
-  private apiUrl = 'http://localhost/sawarni/';
+  private apiUrl = 'http://localhost/sawarni/api/useraccounts/';
 
   private http = inject(HttpClient);
 
-  getUserProfile(user_id : number) : Observable<ApiResponse> {
+  getUserProfile(userId? : number) : Observable<ApiResponse> {
     const formData = new FormData();
-    formData.append('user_id', user_id.toString())
-    return this.http.post<ApiResponse>(this.apiUrl + "getUserProfile.php", formData)
+    if (userId) {
+      formData.append('userId', userId.toString())
+    }
+    return this.http.post<ApiResponse>(this.apiUrl + "GetUserProfile.php", formData)
+  }
+
+  getUserProfilePicture(userId : number) : Observable<ApiResponse> {
+    const formData = new FormData();
+    formData.append('userId', userId.toString());
+    return this.http.post<ApiResponse>(this.apiUrl + "GetUserProfilePicture.php", formData)
   }
 
   updateUserProfile(new_profile : FormData) : Observable<ApiResponse> {
-    return this.http.post<ApiResponse>(this.apiUrl + 'updateUserProfile.php', new_profile);
+    return this.http.post<ApiResponse>(this.apiUrl + 'UpdateUserProfile.php', new_profile);
   }
 
   suggestUsingKeyword(keyword : FormData) : Observable<ApiResponse> {
-    return this.http.post<ApiResponse>(this.apiUrl + 'suggestUsingKeyword.php', keyword);
+    return this.http.post<ApiResponse>(this.apiUrl + 'SearchUsernames.php', keyword);
   }
 
+  getLoggedInUserId() : Observable<ApiResponse> {
+    return this.http.post<ApiResponse>(this.apiUrl + 'GetLoggedInUserId.php', null);
+  }
+
+  addUser(username : string, password : string, location : string, aboutMe : string, profilePicture : File) : Observable<ApiResponse> {
+    const formData = new FormData();
+    formData.append('username', username);
+    formData.append('password', password);
+    formData.append('location', location);
+    formData.append('aboutMe', aboutMe);
+    formData.append('profilePicture', profilePicture, profilePicture.name);
+    return this.http.post<ApiResponse>(this.apiUrl + 'AddUser.php', formData);
+  }
 
 }

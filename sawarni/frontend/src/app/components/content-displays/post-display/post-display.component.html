@@ -5,12 +5,12 @@
 
 
   <!-- Header -->
-  <div id="header" class="row pt-1 pb-1 mt-3 mb-1">
+  <div id="header" class="row pt-3 pb-3 mt-3 mb-1 px-2">
 
     <!-- pfp -->
     <div id="profilePictureContainer" class="col-auto">
       <img id="profilePicture" class="rounded-circle" 
-           [src]="post.profile_picture_path" 
+           [src]="post.profilePicturePath" 
            height="60px" width="60px"
            alt="Profile picture"
            (click)="onProfilePictureClick()">
@@ -20,25 +20,25 @@
     <div class="col pt-1">
       <div class="row">
         <div class="col">
-          <label id="username">{{post.user_name}}</label>
+          <label id="username">{{post.username}}</label>
         </div>
       </div>
       <div class="row">
         <div class="col">
-          <label id="userDetails">{{post.creation_date}}</label>
+          <label id="userDetails">{{post.creationDate}}</label>
         </div>
       </div>
     </div>
 
     <!-- like button and number of likes -->
     <div class="col-3 d-flex justify-content-center align-items-center">
-      @if (liked) {
+      @if (post.likedByThisUser) {
         <img (click)="likePost();" class="mx-3 img-fluid" src="assets/icons/like_full.png" height="25px" width="25px">
       }
       @else {
         <img (click)="likePost();" class="mx-3 img-fluid" src="assets/icons/like_outline.png" height="25px" width="25px">
       }
-      <span>{{post.likes_count}}</span>
+      <span>{{post.likeCount}}</span>
     </div>
 
   </div>
@@ -50,69 +50,71 @@
   <!-- Text -->
   <div id="textContainer" class="row pt-2 mb-1">
     <div class="col">
-      <p id="text">{{post.text_content}}</p>
+      <p id="text" style="font-size: large;">{{post.textContent}}</p>
     </div>
   </div>
-
 
 
 
 
   <!-- Image -->
-  <div id="attachmentsContainer" class="row pt-2 pb-2">
-    <div class="col">
-      @if (viewAllAttachments) {
-        @for (attachment of post.attachments; track attachment; let i = $index) {
+  @if (this.post.attachments.length > 0) {
+    <div id="attachmentsContainer" class="row pt-2 pb-2 px-2">
+      <div class="col">
+        @if (viewAllAttachments) {
+          @for (attachment of post.attachments; track attachment; let i = $index) {
 
-          @if (['jpeg', 'jpg', 'png'].includes(post.attachments[i].file_type)) {
-            <img  [src]="post.attachments[i].file_path"
-            width="100%" 
-            alt="Image could not be displayed"
-            (mousedown)="openAttachmentsView(i)"
-            class="mt-2 displayed-image">
+            @if (['jpeg', 'jpg', 'png'].includes(post.attachments[i].fileType)) {
+              <img  [src]="post.attachments[i].filePath"
+              width="100%" 
+              alt="Image could not be displayed"
+              (mousedown)="openAttachmentsView(i)"
+              class="mt-2 displayed-image">
+              }
+            
+
+            @if (['mp4'].includes(post.attachments[i].fileType)) {
+              <video width="100%" 
+                      controls
+                      (mousedown)="openAttachmentsView(i)"
+                      class="mt-2 displayed-video">
+                <source [src]="post.attachments[i].filePath" type="video/mp4">
+                Your browser does not support the video tag.
+              </video>
             }
-          
 
-          @if (['mp4'].includes(post.attachments[i].file_type)) {
+          }
+
+          <a (mousedown)="onViewLessAttachments()">View less.</a>
+
+
+        }
+        @else {
+          @if (['jpeg', 'jpg', 'png'].includes(post.attachments[0].fileType)) {
+            <img  [src]="post.attachments[0].filePath"
+                width="100%" 
+                alt="Image could not be displayed"
+                (mousedown)="openAttachmentsView(0)"
+                class="mt-2 displayed-image">
+          }
+
+          @if (['mp4'].includes(post.attachments[0].fileType)) {
             <video width="100%" 
-                    controls
-                    (mousedown)="openAttachmentsView(i)"
-                    class="mt-2 displayed-video">
-              <source [src]="post.attachments[i].file_path" type="video/mp4">
+                  controls
+                  (mousedown)="openAttachmentsView(0)"
+                  class="mt-2 displayed-video">
+              <source [src]="post.attachments[0].filePath" type="video/mp4">
               Your browser does not support the video tag.
             </video>
           }
+              
+          <a (mousedown)="onViewMoreAttachments()">View more.</a>
 
         }
-
-        <a (mousedown)="onViewLessAttachments()">View less.</a>
-
-
-      }
-      @else {
-        @if (['jpeg', 'jpg', 'png'].includes(post.attachments[0].file_type)) {
-          <img  [src]="post.attachments[0].file_path"
-              width="100%" 
-              alt="Image could not be displayed"
-              (mousedown)="openAttachmentsView(0)"
-              class="mt-2 displayed-image">
-        }
-
-        @if (['mp4'].includes(post.attachments[0].file_type)) {
-          <video width="100%" 
-                controls
-                (mousedown)="openAttachmentsView(0)"
-                class="mt-2 displayed-video">
-            <source [src]="post.attachments[0].file_path" type="video/mp4">
-            Your browser does not support the video tag.
-          </video>
-        }
-            
-        <a (mousedown)="onViewMoreAttachments()">View more.</a>
-
-      }
+      </div>
     </div>
-  </div>
+  }
+  
 
 
 
